@@ -1,7 +1,7 @@
 <?php
 require "vendor/autoload.php";
 
-// GET MEMBER CONTACT
+// GET MEMBER CONTACT (ONLY ONE)
 function queryMemberContact(/*$id*/){
 
     $service = new PHPSupabase\Service(
@@ -14,18 +14,19 @@ function queryMemberContact(/*$id*/){
     $db = $service->initializeDatabase('member_contact', 'member_contact_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'member_id,member_first_name,member_last_name',
-        'from'   => 'member',
+        'select' => 'member_contact_id,member_contact_first_name,member_contact_last_name',
+        'from'   => 'member_contact',
         'where' => 
         [
+            'member_contact_status' => 'eq.active',
             'member_id' => 'eq.1'
         ]
     ];
     
     try{
-        $listMember = $db->createCustomQuery($query)->getResult();
-        foreach ($listMember as $member){
-            echo $member->member_id . ' - ' . $member->member_first_name . ' ' . $member->member_last_name . '<br />';
+        $listMemberContact = $db->createCustomQuery($query)->getResult();
+        foreach ($listMemberContact as $memberContact){
+            echo $memberContact->member_contact_id . ' - ' . $memberContact->member_contact_first_name . ' ' . $memberContact->member_contact_last_name . '<br />';
         }
     }
     catch(Exception $e){

@@ -7,8 +7,11 @@ queryMembers();
 echo "<br>";
 echo "<br>";
 echo "Try query one member (id 1): <br>";
-queryOneMember();
-
+queryOneMember(); //need param
+echo "<br>";
+echo "<br>";
+echo "Try query member contact <br>";
+queryMemberContact(); // need param
 //createMember();
 //updateMember();
 
