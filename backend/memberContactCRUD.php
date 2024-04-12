@@ -1,7 +1,7 @@
 <?php
 require "vendor/autoload.php";
 
-// GET MEMBER
+// GET MEMBER CONTACT
 function queryMemberContact(/*$id*/){
 
     $service = new PHPSupabase\Service(
@@ -33,7 +33,7 @@ function queryMemberContact(/*$id*/){
     }
 }
 
-// INSERT NEW MEMBER
+// INSERT NEW MEMBER CONTACT
 function createMemberContact(){
 
     $service = new PHPSupabase\Service(
@@ -76,7 +76,7 @@ function createMemberContact(){
     }
 }
 
-// UPDATE MEMBER
+// UPDATE MEMBER CONTACT
 function updateMemberContact(/*$id*/){
 
     $service = new PHPSupabase\Service(
@@ -120,7 +120,7 @@ function updateMemberContact(/*$id*/){
     }
 }
 
-// DELETE MEMBER
+// DELETE MEMBER CONTACT
 function deleteMemberContact($id){
 
     $service = new PHPSupabase\Service(
