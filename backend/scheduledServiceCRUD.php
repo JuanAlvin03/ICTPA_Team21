@@ -5,17 +5,17 @@ require "vendor/autoload.php";
 
 NEEDED FUNCTIONS:
 
-- Query All members (not sure when to use this, whats needed is probably list of members that has some special req or list filtered/searched using search bar)
-- Query some members (for search bar???? or some kind of filtering) (not created yet)
-- Get One Member (must)
-- Create (must)
-- Update (must)
-- Delete (we dont have status attr yet, or hard delete) (must)
+- Query Scheduled Services (in a day?? week? for a particular member?)
+- Get One Scheduled service 
+- Create
+- Update 
+- Delete (we dont have status attr yet, or hard delete)
 
 */
 
-// GET MEMBER
-function queryMembers(){
+
+// GET SCHEDULED SERVICE
+function queryScheduledService(){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -24,7 +24,7 @@ function queryMembers(){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
     
     $query = [
         'select' => 'member_id,member_first_name,member_last_name',
@@ -42,8 +42,8 @@ function queryMembers(){
     }
 }
 
-// GET ONE MEMBER (BASED ON ID)
-function queryOneMember(){
+// GET ONE SCHEDULED SERVICE
+function queryOneScheduledService(){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -52,7 +52,7 @@ function queryOneMember(){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
     
     $query = [
         'select' => 'member_id,member_first_name,member_last_name',
@@ -74,8 +74,8 @@ function queryOneMember(){
     }
 }
 
-// INSERT NEW MEMBER
-function createMember(){
+// INSERT SCHEDULED SERVICE
+function createScheduledService(){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -84,7 +84,7 @@ function createMember(){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
     
     $newMember = [
         // MEMBER ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
@@ -117,8 +117,8 @@ function createMember(){
     }
 }
 
-// UPDATE MEMBER
-function updateMember(/*$id*/){
+// UPDATE SCHEDULED SERVICE
+function updateScheduledService(/*$id*/){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -127,7 +127,7 @@ function updateMember(/*$id*/){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
     
     // DONT EVER UPDATE MEMBER ID
     $updateMember = [
@@ -161,8 +161,8 @@ function updateMember(/*$id*/){
     }
 }
 
-// DELETE MEMBER
-function deleteMember($id){
+// DELETE SCHEDULED SERVICE
+function deleteScheduledService($id){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -171,7 +171,7 @@ function deleteMember($id){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
 
     // IF SOFT DELETE, UPDATE STATUS TO INACTIVE
     

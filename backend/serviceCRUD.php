@@ -1,6 +1,18 @@
 <?php
 require "vendor/autoload.php";
 
+/*
+
+NEEDED FUNCTIONS:
+
+- Get All services (must) (to display kinds of service we offer/choose the service for member)
+- Get One service (maybe)
+- Create service (less maybe)
+- Update (must)
+- Delete (we dont have status or deleted_at attr yet, or hard delete)
+
+*/
+
 // GET Service
 function queryService(){
 

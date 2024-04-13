@@ -1,6 +1,17 @@
 <?php
 require "vendor/autoload.php";
 
+/*
+
+NEEDED FUNCTIONS:
+
+- Get One Member contact //only one needed, since the only way to search contact is probably through member
+- Create (must)
+- Update (must)
+- Delete (we dont have status attr yet, or hard delete) (must)
+
+*/
+
 // GET MEMBER CONTACT (ONLY ONE)
 function queryMemberContact(/*$id*/){ // param is member id
 
