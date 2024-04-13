@@ -1,8 +1,8 @@
 <?php
 require "vendor/autoload.php";
 
-// GET MEMBER
-function queryMembers(){
+// GET Service
+function queryService(){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -11,17 +11,17 @@ function queryMembers(){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('service', 'service_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'member_id,member_first_name,member_last_name',
-        'from'   => 'member'
+        'select' => 'service_id,service_type,service_cost',
+        'from'   => 'service'
     ];
     
     try{
-        $listMember = $db->createCustomQuery($query)->getResult();
-        foreach ($listMember as $member){
-            echo $member->member_id . ' - ' . $member->member_first_name . ' ' . $member->member_last_name . '<br />';
+        $listService = $db->createCustomQuery($query)->getResult();
+        foreach ($listService as $service){
+            echo $service->service_id . ' - ' . $service->service_type . ' - ' . $service->service_cost . '<br />';
         }
     }
     catch(Exception $e){
@@ -29,9 +29,9 @@ function queryMembers(){
     }
 }
 
-// GET ONE MEMBER (BASED ON ID)
-function queryOneMember(){
-
+// GET ONE Service (BASED ON ID)
+function queryOneService(){
+/*
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnemZrd3F3b29ia2F2YnhveHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5Nzc1MTcsImV4cCI6MjAyNjU1MzUxN30.0EG7AWB6TsRMqTssMS9bhf0plepaG1EPpMiX1jW8aUE", 
@@ -39,14 +39,14 @@ function queryOneMember(){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('service', 'service_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'member_id,member_first_name,member_last_name',
-        'from'   => 'member',
+        'select' => 'service_id,service_type,service_cost',
+        'from'   => 'service',
         'where' => 
         [
-            'member_id' => 'eq.1'
+            'service_id' => 'eq.1'
         ]
     ];
     
@@ -58,12 +58,12 @@ function queryOneMember(){
     }
     catch(Exception $e){
         echo $e->getMessage();
-    }
+    }*/
 }
 
-// INSERT NEW MEMBER
-function createMember(){
-
+// INSERT NEW Service
+function createService(){
+/*
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnemZrd3F3b29ia2F2YnhveHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5Nzc1MTcsImV4cCI6MjAyNjU1MzUxN30.0EG7AWB6TsRMqTssMS9bhf0plepaG1EPpMiX1jW8aUE", 
@@ -97,15 +97,15 @@ function createMember(){
                     )
     
             )
-        */
+        *//*
     }
     catch(Exception $e){
         echo $e->getMessage();
-    }
+    }*/
 }
 
-// UPDATE MEMBER
-function updateMember(/*$id*/){
+// UPDATE Service
+function updateService(/*$id*/){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -114,21 +114,16 @@ function updateMember(/*$id*/){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('service', 'service_id'); //param(tablename, column name of PK)
     
-    // DONT EVER UPDATE MEMBER ID
-    $updateMember = [
-        'member_first_name' => 'Tom2',
-        'member_last_name' => 'Jefferson2',
-        //'member_dob' => '1950-09-29',  // date must be checked (less than today)
-        //'member_gender' => 'Male',
-        'member_address' => '124 Swanston Street, Melbourne',
-        //'member_status' => 'active', // status is DEFAULT ACTIVE
-        //'member_first_name' => 'Video Games' //  additional notes
+    // DONT EVER UPDATE SERVICE ID
+    $updateService = [
+        'service_type' => 'Tom2', //inhome/residential
+        'service_cost' => 'Jefferson2', //float
     ];
 
     try{
-        $data = $db->update(6, $updateMember); //the first parameter is the product id
+        $data = $db->update(6, $updateService); //the first parameter is the product id
         print_r($data); //returns an array with the product data (updated)
         /*
             Array
@@ -148,9 +143,9 @@ function updateMember(/*$id*/){
     }
 }
 
-// DELETE MEMBER
-function deleteMember($id){
-
+// DELETE Service
+function deleteService($id){
+/*
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnemZrd3F3b29ia2F2YnhveHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5Nzc1MTcsImV4cCI6MjAyNjU1MzUxN30.0EG7AWB6TsRMqTssMS9bhf0plepaG1EPpMiX1jW8aUE", 
@@ -168,7 +163,7 @@ function deleteMember($id){
     }
     catch(Exception $e){
         echo $e->getMessage();
-    }
+    }*/
 }
 
 ?>

@@ -2,7 +2,7 @@
 require "vendor/autoload.php";
 
 // GET MEMBER CONTACT (ONLY ONE)
-function queryMemberContact(/*$id*/){
+function queryMemberContact(/*$id*/){ // param is member id
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -19,14 +19,16 @@ function queryMemberContact(/*$id*/){
         'where' => 
         [
             'member_contact_status' => 'eq.active',
-            'member_id' => 'eq.1'
+            'member_id' => 'eq.1' // Member ID from param
         ]
     ];
     
     try{
         $listMemberContact = $db->createCustomQuery($query)->getResult();
         foreach ($listMemberContact as $memberContact){
-            echo $memberContact->member_contact_id . ' - ' . $memberContact->member_contact_first_name . ' ' . $memberContact->member_contact_last_name . '<br />';
+            echo $memberContact->member_contact_id . ' - ' . 
+            $memberContact->member_contact_first_name . ' ' . 
+            $memberContact->member_contact_last_name . '<br />';
         }
     }
     catch(Exception $e){
@@ -46,19 +48,21 @@ function createMemberContact(){
 
     $db = $service->initializeDatabase('member_contact', 'member_contact_id'); //param(tablename, column name of PK)
     
-    $newMember = [
+    $newMemberContact = [
         // MEMBER CONTACT ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
-        'member_first_name' => 'Harold',
-        'member_last_name' => 'Fergusson',
-        'member_dob' => '1940-03-19',  // date must be checked (less than today)
-        'member_gender' => 'Male',
-        'member_address' => '70 Puckle Street, Melbourne',
-        //'member_status' => 'active', // status is DEFAULT ACTIVE
-        //'member_first_name' => 'Video Games' //  additional notes
+        'member_contact_first_name' => 'Kevin',
+        'member_contact_last_name' => 'Smith',
+        'member_contact_phone_number' => '0488756123',  // maybe need to check length
+        'member_contact_email_address' => 'ksmth85@gmail.com',  // need to check if in correct email format or not
+        'member_contact_relationship' => 'Child of member',
+        'member_contact_address' => '300 Glenferrie Road, Hawthorn, Australia',
+        'member_id' => '6', // Foreign KEY
+
+        //'member_contact_status' => 'active', // status is DEFAULT ACTIVE
     ];
     
     try{
-        $data = $db->insert($newMember);
+        $data = $db->insert($newMemberContact);
         print_r($data); //returns an array with the new register data
         /*
             Array
@@ -121,7 +125,7 @@ function updateMemberContact(/*$id*/){
     }
 }
 
-// DELETE MEMBER CONTACT
+// DELETE MEMBER CONTACT (SOFT DELETE)
 function deleteMemberContact($id){
 
     $service = new PHPSupabase\Service(
@@ -133,8 +137,9 @@ function deleteMemberContact($id){
 
     $db = $service->initializeDatabase('member_contact', 'member_contact_id'); //param(tablename, column name of PK)
 
-    // IF SOFT DELETE, UPDATE STATUS TO INACTIVE
-    
+    //query contact based on member id
+    //update contact's status based in the queried contact id
+
     try{
         $data = $db->delete($id); //the parameter is the product id
         echo 'Product deleted successfully';
