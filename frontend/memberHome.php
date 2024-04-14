@@ -1,7 +1,15 @@
 <?php
+include_once "../backend/memberCRUD.php";
+
+if(isset($_GET["searchMember"])){
+    if($_GET["searchMember"] != ""){
+        $data = searchMembers($_GET["searchMember"]);
+    }
+}
 
 ?>
 
+<!DOCTYPE html>
 <html>
 <head>
 <title>Member Management</title>
@@ -134,18 +142,17 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-                <form action="" method="get">
-                    
-                </form>
-              <h6 class="w3-opacity">Search Member</h6>
-              <p contenteditable="true" class="w3-border w3-padding">Medication reminder- Today</p>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i> More</button> 
+              <h5>Search Member</h5>
+              <form action="" method="get">
+                <input type="text" name="searchMember" placeholder="Member ID/Name" class="w3-border w3-padding"><br><br>
+                <button type="submit" class="w3-button w3-theme w3-border w3-padding">Search</button>
+              </form>
             </div>
           </div>
         </div>
       </div>
 
-
+      
       
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="head.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
@@ -165,9 +172,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> details</p>
         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> address</p>
         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> DOB </p>
-        <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
         <p></p>
-
       </div> 
 
 

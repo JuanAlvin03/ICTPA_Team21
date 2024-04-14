@@ -1,7 +1,7 @@
 <?php
-require "memberCRUD.php";
-require "memberContactCRUD.php";
-require "serviceCRUD.php";
+include_once "memberCRUD.php";
+include_once "memberContactCRUD.php";
+include_once "serviceCRUD.php";
 
 
 echo "Try query all member: <br>";
@@ -21,5 +21,11 @@ echo "<br>";
 echo "Try query service <br>";
 queryService();
 //createMemberContact();
+/*
+echo "<br>";
+echo "<br>";
+echo "Try member search: <br>";
+searchMembers("sam");
+*/
 
 ?>

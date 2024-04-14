@@ -42,6 +42,80 @@ function queryMembers(){
     }
 }
 
+// SEARCH MEMBERS BY ID OR NAME (FIRST OR LAST)
+function searchMembers($param){
+
+    $service = new PHPSupabase\Service(
+        // PROJECT API KEY
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnemZrd3F3b29ia2F2YnhveHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5Nzc1MTcsImV4cCI6MjAyNjU1MzUxN30.0EG7AWB6TsRMqTssMS9bhf0plepaG1EPpMiX1jW8aUE", 
+        // PROJECT URL
+        "https://egzfkwqwoobkavbxoxry.supabase.co"
+    );
+
+    $db = $service->initializeDatabase('member', 'member_id'); //argument is (tablename, column name of PK)
+    
+    $query = [
+        'select' => 'member_id,member_first_name,member_last_name',
+        'from'   => 'member',
+        'where' => 
+        [
+            'member_first_name' => 'ilike.%' . strval($param) . '%'
+        ]
+    ];
+    
+    try{
+        $listMember1 = $db->createCustomQuery($query)->getResult();
+    }
+    catch(Exception $e){
+        echo $e->getMessage();
+    }
+
+    $query = [
+        'select' => 'member_id,member_first_name,member_last_name',
+        'from'   => 'member',
+        'where' => 
+        [
+            'member_last_name' => 'ilike.%' . strval($param) . '%'
+        ]
+    ];
+    
+    try{
+        $listMember2 = $db->createCustomQuery($query)->getResult();
+    }
+    catch(Exception $e){
+        echo $e->getMessage();
+    }
+
+    $listMember3 = array();
+
+    if(is_numeric($param)){
+        if(intval($param) > 0){
+            $query = [
+                'select' => 'member_id,member_first_name,member_last_name',
+                'from'   => 'member',
+                'where' => 
+                [
+                    'member_id' => 'eq.' . intval($param)
+                ]
+            ];
+            
+            try{
+                $listMember3 = $db->createCustomQuery($query)->getResult();
+            }
+            catch(Exception $e){
+                echo $e->getMessage();
+            }
+        }
+    }
+    array_push($listMember1, ...$listMember2);
+    array_push($listMember1, ...$listMember3);
+    /*
+    foreach ($listMember1 as $member){
+        echo $member->member_id . ' - ' . $member->member_first_name . ' ' . $member->member_last_name . '<br />';
+    }
+    */
+}
+
 // GET ONE MEMBER (BASED ON ID)
 function queryOneMember(){
 
