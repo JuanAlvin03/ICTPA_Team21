@@ -54,6 +54,7 @@ function searchMembers($param){
 
     $db = $service->initializeDatabase('member', 'member_id'); //argument is (tablename, column name of PK)
     
+    /*
     $query = [
         'select' => 'member_id,member_first_name,member_last_name',
         'from'   => 'member',
@@ -62,13 +63,33 @@ function searchMembers($param){
             'member_first_name' => 'ilike.%' . strval($param) . '%'
         ]
     ];
+    */
+
+    $query = [
+        'select' => 'member_id,member_first_name,member_last_name',
+        'from'   => 'member',
+        'join'   => [
+            [
+                'table' => 'member_contact',
+                'tablekey' => 'member_contact_id'
+            ]
+        ],
+        'where' => 
+        [
+            'member_first_name' => 'ilike.%' . strval($param) . '%'
+        ]
+    ];
+    
     
     try{
         $listMember1 = $db->createCustomQuery($query)->getResult();
+        //$listMember1 = $db->join('member_contact', '')->getResult();
     }
     catch(Exception $e){
         echo $e->getMessage();
     }
+
+    var_dump($listMember1);
 
     $query = [
         'select' => 'member_id,member_first_name,member_last_name',
@@ -114,6 +135,7 @@ function searchMembers($param){
         echo $member->member_id . ' - ' . $member->member_first_name . ' ' . $member->member_last_name . '<br />';
     }
     */
+    return $listMember1;
 }
 
 // GET ONE MEMBER (BASED ON ID)

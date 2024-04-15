@@ -1,6 +1,8 @@
 <?php
 include_once "../backend/memberCRUD.php";
 
+$data = array();
+
 if(isset($_GET["searchMember"])){
     if($_GET["searchMember"] != ""){
         $data = searchMembers($_GET["searchMember"]);
@@ -152,31 +154,35 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         </div>
       </div>
 
-      
+      <?php
+        if((count($data) == 0) && isset($_GET["searchMember"])): 
+      ?>
       
       <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="head.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">16 min</span>
-        <h4>Member 1</h4><br>
-        <hr class="w3-clear">
-        <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> details</p>
-        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> address</p>
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> DOB </p>
+        <h4>No such member</h4>
+      </div>  
+            
+      <?php endif;
+        if(!isset($_GET["searchMember"])) : 
+      ?>
+
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <h4>Search a member!</h4>
       </div>  
 
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+      <?php endif;
+            foreach ($data as $d) :
+      ?>
+        <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="head.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">32 min</span>
-        <h4>Member 2</h4><br>
+        <h4><?=$d->member_first_name?> <?=$d->member_last_name?></h4><br>
         <hr class="w3-clear">
-        <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> details</p>
-        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> address</p>
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> DOB </p>
-        <p></p>
-      </div> 
-
-
-      
+        <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>Contact Person Name</p>
+        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>Contact Person Number</p>
+        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>Contact Person Email</p>
+        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>See details and update button</p>
+        </div>  
+      <?php endforeach; ?>   
     <!-- End Middle Column -->
     </div>
     
