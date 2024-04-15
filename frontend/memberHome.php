@@ -42,7 +42,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       <a href="#" class="w3-bar-item w3-button">Update your profile</a>
     </div>
   </div>
-  <a href="Login.html" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
+  <!--Log out must redirect to logout page to actually logout and stuff and then redirect to login page -->
+  <a href="login.php" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">
     Logout
   </a>
  </div>
