@@ -1,5 +1,6 @@
 <?php
 require "vendor/autoload.php";
+include_once "memberContactCRUD.php";
 
 /*
 
@@ -53,66 +54,14 @@ function searchMembers($param){
     );
 
     $db = $service->initializeDatabase('member', 'member_id'); //argument is (tablename, column name of PK)
-    
-    /*
-    $query = [
-        'select' => 'member_id,member_first_name,member_last_name',
-        'from'   => 'member',
-        'where' => 
-        [
-            'member_first_name' => 'ilike.%' . strval($param) . '%'
-        ]
-    ];
-    */
 
-    $query = [
-        'select' => 'member_id,member_first_name,member_last_name',
-        'from'   => 'member',
-        'join'   => [
-            [
-                'table' => 'member_contact',
-                'tablekey' => 'member_contact_id'
-            ]
-        ],
-        'where' => 
-        [
-            'member_first_name' => 'ilike.%' . strval($param) . '%'
-        ]
-    ];
-    
-    
-    try{
-        $listMember1 = $db->createCustomQuery($query)->getResult();
-        //$listMember1 = $db->join('member_contact', '')->getResult();
-    }
-    catch(Exception $e){
-        echo $e->getMessage();
-    }
-
-    var_dump($listMember1);
-
-    $query = [
-        'select' => 'member_id,member_first_name,member_last_name',
-        'from'   => 'member',
-        'where' => 
-        [
-            'member_last_name' => 'ilike.%' . strval($param) . '%'
-        ]
-    ];
-    
-    try{
-        $listMember2 = $db->createCustomQuery($query)->getResult();
-    }
-    catch(Exception $e){
-        echo $e->getMessage();
-    }
-
-    $listMember3 = array();
+    $listMember = array();
+    $listMember2 = array();
 
     if(is_numeric($param)){
         if(intval($param) > 0){
             $query = [
-                'select' => 'member_id,member_first_name,member_last_name',
+                'select' => 'member_id,member_first_name,member_last_name,member_dob',
                 'from'   => 'member',
                 'where' => 
                 [
@@ -121,25 +70,59 @@ function searchMembers($param){
             ];
             
             try{
-                $listMember3 = $db->createCustomQuery($query)->getResult();
+                $listMember = $db->createCustomQuery($query)->getResult();
             }
             catch(Exception $e){
                 echo $e->getMessage();
             }
         }
+    } 
+    else {
+        $query = [
+            'select' => 'member_id,member_first_name,member_last_name,member_dob',
+            'from'   => 'member',
+            'where' => 
+            [
+                'member_first_name' => 'ilike.%' . strval($param) . '%'
+            ]
+        ];
+        
+        try{
+            $listMember = $db->createCustomQuery($query)->getResult();
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
+    
+        $query = [
+            'select' => 'member_id,member_first_name,member_last_name,member_dob',
+            'from'   => 'member',
+            'where' => 
+            [
+                'member_last_name' => 'ilike.%' . strval($param) . '%'
+            ]
+        ];
+        
+        try{
+            $listMember2 = $db->createCustomQuery($query)->getResult();
+        }
+        catch(Exception $e){
+            echo $e->getMessage();
+        }
+
+        array_push($listMember, ...$listMember2);
     }
-    array_push($listMember1, ...$listMember2);
-    array_push($listMember1, ...$listMember3);
+
     /*
     foreach ($listMember1 as $member){
         echo $member->member_id . ' - ' . $member->member_first_name . ' ' . $member->member_last_name . '<br />';
     }
     */
-    return $listMember1;
+    return $listMember;
 }
 
 // GET ONE MEMBER (BASED ON ID)
-function queryOneMember(){
+function queryOneMember($id){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -151,19 +134,17 @@ function queryOneMember(){
     $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'member_id,member_first_name,member_last_name',
+        'select' => 'member_id,member_first_name,member_last_name,member_dob,member_address,member_gender',
         'from'   => 'member',
         'where' => 
         [
-            'member_id' => 'eq.1'
+            'member_id' => 'eq.' . intval($id)
         ]
     ];
     
     try{
-        $listMember = $db->createCustomQuery($query)->getResult();
-        foreach ($listMember as $member){
-            echo $member->member_id . ' - ' . $member->member_first_name . ' ' . $member->member_last_name . '<br />';
-        }
+        $member = $db->createCustomQuery($query)->getResult();
+        var_dump(($member));
     }
     catch(Exception $e){
         echo $e->getMessage();

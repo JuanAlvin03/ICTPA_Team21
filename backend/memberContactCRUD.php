@@ -13,7 +13,7 @@ NEEDED FUNCTIONS:
 */
 
 // GET MEMBER CONTACT (ONLY ONE)
-function queryMemberContact(/*$id*/){ // param is member id
+function queryMemberContact($member_id){ // param is member id
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -25,13 +25,14 @@ function queryMemberContact(/*$id*/){ // param is member id
     $db = $service->initializeDatabase('member_contact', 'member_contact_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'member_contact_id,member_contact_first_name,member_contact_last_name',
+        'select' => '*',
         'from'   => 'member_contact',
         'where' => 
         [
             'member_contact_status' => 'eq.active',
-            'member_id' => 'eq.1' // Member ID from param
-        ]
+            'member_id' => 'eq.' . intval($member_id) // Member ID from param
+        ],
+        'limit' => 1
     ];
     
     try{

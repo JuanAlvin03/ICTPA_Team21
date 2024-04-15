@@ -58,6 +58,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <h1 style="text-align: center">Member Management</h1><br>
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
@@ -177,10 +178,13 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <img src="head.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
         <h4><?=$d->member_first_name?> <?=$d->member_last_name?></h4><br>
         <hr class="w3-clear">
-        <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>Contact Person Name</p>
-        <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>Contact Person Number</p>
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>Contact Person Email</p>
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>See details and update button</p>
+        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>DOB : <?=$d->member_dob?></p>
+        <p>
+          <form action="memberForm.php" method="GET">
+            <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnDetail">See Details</button>
+            <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnUpdate">Update Details</button>
+          </form>
+        </p>
         </div>  
       <?php endforeach; ?>   
     <!-- End Middle Column -->

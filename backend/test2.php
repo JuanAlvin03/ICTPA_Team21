@@ -9,11 +9,11 @@ queryMembers();
 echo "<br>";
 echo "<br>";
 echo "Try query one member (id 1): <br>";
-queryOneMember(); //need param
+//queryOneMember(); //need param - member id
 echo "<br>";
 echo "<br>";
 echo "Try query member contact <br>";
-queryMemberContact(); // need param
+//queryMemberContact(); // need param - member id
 //createMember();
 //updateMember();
 echo "<br>";
