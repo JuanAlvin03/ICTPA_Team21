@@ -152,7 +152,7 @@ function queryOneMember($id){
 }
 
 // INSERT NEW MEMBER
-function createMember(){
+function createMember($input){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -165,18 +165,17 @@ function createMember(){
     
     $newMember = [
         // MEMBER ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
-        'member_first_name' => 'Sammy',
-        'member_last_name' => 'Samson',
-        'member_dob' => '1954-11-29',  // date must be checked (less than today)
-        'member_gender' => 'Male',
-        'member_address' => '1 Burwood Road, Melbourne, Australia',
-        //'member_status' => 'active', // status is DEFAULT ACTIVE
-        //'member_first_name' => 'Video Games' //  additional notes
+        'member_first_name' => $input["memberFirstName"],
+        'member_last_name' => $input["memberLastName"],
+        'member_dob' => $input["memberDOB"],  // date must be checked (less than today)
+        'member_gender' => $input["memberGender"],
+        'member_address' => $input["memberAddress"],
+        // 'additional_notes' => $input[] //  additional notes, in json?
     ];
     
     try{
         $data = $db->insert($newMember);
-        print_r($data); //returns an array with the new register data
+        return($data); //returns an array with the new register data
         /*
             Array
             (
@@ -190,7 +189,7 @@ function createMember(){
         */
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        return($e->getMessage());
     }
 }
 

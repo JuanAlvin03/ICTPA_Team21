@@ -1,0 +1,29 @@
+#formPage {
+    width: 400px;
+    margin: auto;
+}
+
+#mainHeader {
+    text-align: center;
+
+}
+
+#centreMemberButton {
+    text-align: center;
+}
+#searchMemberButton {
+    width: 80px;
+    text-align: center;
+}
+
+#addMemberButton {
+    text-align: center;
+}
+
+#addMemberContactsButton {
+    text-align: center;
+}
+
+#addServiceButton {
+    text-align: center;
+}
