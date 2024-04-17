@@ -5,19 +5,19 @@
 
     $todayDate = date("Y-m-d");
 
-    if(isset($_GET["btnDetail"])){
+    if(isset($_POST["btnDetail"])){
         //echo "Member's Detail" . "<br>";
         //queryOneMember($_GET["btnDetail"]);
         $operation = "Detail";
     }
 
-    if(isset($_GET["btnUpdate"])){
+    if(isset($_POST["btnUpdate"])){
         //echo "Update Member's Detail" . "<br>";
         //queryOneMember($_GET["btnUpdate"]);
         $operation = "Update";
     }
 
-    if(isset($_GET["btnAdd"])){
+    if(isset($_POST["btnAdd"])){
         //echo "Create New Member" . "<br>";
         $operation = "Add";
     }
@@ -34,7 +34,7 @@
         <link rel="stylesheet" type="text/css" href="styles/formStyle.css">
         
         
-        <title>Member <?=$operation?></title>
+        <title>Add Member</title>
     </head>
 
     <body>

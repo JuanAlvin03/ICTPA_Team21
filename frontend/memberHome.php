@@ -182,7 +182,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>DOB : <?=$d->member_dob?></p>
         <p>Member ID : <?=$d->member_id?></p>
         <p>
-          <form action="memberForm.php" method="GET">
+          <form action="detailMemberForm.php" method="POST">
             <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnDetail">See Details</button>
             <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnUpdate">Update Details</button>
           </form>
