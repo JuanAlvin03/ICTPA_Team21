@@ -1,6 +1,8 @@
 <?php
 include_once "../backend/memberCRUD.php";
 
+//cek login info, if no info -> redirect to login
+
 $data = array();
 
 if(isset($_GET["searchMember"])){
@@ -140,8 +142,15 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     
     <!-- Middle Column -->
 
-    <div class="w3-col m7">
     
+
+    <div class="w3-col m7">
+      <div class="w3-card w3-white w3-round w3-margin">
+        <form action="addMemberForm.php">
+          <button type="submit" style="width: 100%;" class="w3-button w3-theme w3-border w3-padding" name="btnAdd">Add New Member</button>
+        </form>
+      </div>
+
       <div class="w3-row-padding">
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
@@ -184,6 +193,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         <p>
           <form action="detailMemberForm.php" method="POST">
             <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnDetail">See Details</button>
+          </form>
+          <form action="updateMemberForm.php" method="POST">
             <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnUpdate">Update Details</button>
           </form>
         </p>

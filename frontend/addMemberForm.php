@@ -1,25 +1,12 @@
 <?php
     include_once "../backend/memberCRUD.php";
 
-    $operation = "";
+    //cek login info, if no info -> redirect to login
 
     $todayDate = date("Y-m-d");
 
-    if(isset($_POST["btnDetail"])){
-        //echo "Member's Detail" . "<br>";
-        //queryOneMember($_GET["btnDetail"]);
-        $operation = "Detail";
-    }
-
-    if(isset($_POST["btnUpdate"])){
-        //echo "Update Member's Detail" . "<br>";
-        //queryOneMember($_GET["btnUpdate"]);
-        $operation = "Update";
-    }
-
-    if(isset($_POST["btnAdd"])){
-        //echo "Create New Member" . "<br>";
-        $operation = "Add";
+    if(!isset($_POST["btnAdd"])){
+        //redir to home
     }
 ?>
 
@@ -51,7 +38,7 @@
               </div> setup up the MemberID from AWD Assignment -->
             
             <!-- FORM -->
-            <form action="../backend/addMemberValidation.php" method="POST">
+            <form action="../backend/memberFormValidation.php" method="POST">
 
                 <!-- FIRST NAME -->
                 <div class="nice-form-group">
@@ -126,8 +113,16 @@
                   <br>
                   <br>
                 </div>
-
             </form>
+
+            <!-- BACK BUTTON -->
+            <form action="memberHome.php">
+                <div id="addMemberButton">
+                    <button type="submit">Back</button>
+                    <br>
+                    <br>
+                </div>
+            </form>   
     </body>
 </html>       
 

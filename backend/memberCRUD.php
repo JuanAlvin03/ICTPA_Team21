@@ -144,10 +144,11 @@ function queryOneMember($id){
     
     try{
         $member = $db->createCustomQuery($query)->getResult();
-        var_dump(($member));
+        return $member;
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        //echo $e->getMessage();
+        return $e->getMessage();
     }
 }
 
