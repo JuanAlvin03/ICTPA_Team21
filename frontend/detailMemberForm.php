@@ -8,12 +8,10 @@
 
     if(isset($_POST["btnDetail"])){
         $data = queryOneMember($_POST["btnDetail"]);
-        //echo "Update Member's Detail" . "<br>";
-        //queryOneMember($_GET["btnUpdate"]);
-        //$operation = "Update";
     } else {
         // btndetail not set
-        // redirect to member home
+        header("Location: memberHome.php");
+        exit;
     }
 
     // if $data empty, 

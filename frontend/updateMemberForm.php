@@ -8,12 +8,10 @@
 
     if(isset($_POST["btnUpdate"])){
         $data = queryOneMember($_POST["btnUpdate"]);
-        //echo "Update Member's Detail" . "<br>";
-        //queryOneMember($_GET["btnUpdate"]);
-        //$operation = "Update";
     } else {
         // btnUpdate not set
-        // redirect to member home
+        header("Location: memberHome.php");
+        exit;
     }
 
     // if $data empty, 
@@ -62,7 +60,7 @@
                 <!-- MEMBER ID Must Be Disabled-->
                 <div class="nice-form-group">
                     <label>Member ID:</label>
-                    <input type="text" placeholder="" value="<?= $d->member_id ?>" style="--nf-input-size: 0.5rem" disabled>
+                    <input type="text" placeholder="" value="<?= $d->member_id ?>" style="--nf-input-size: 0.5rem" id="memberID" name="memberID" disabled>
                 </div> <!--setup up the MemberID from AWD Assignment -->
 
                 <!-- FIRST NAME -->
@@ -135,7 +133,7 @@
 
                 <!-- UPDATE BUTTON -->
                 <div id="addMemberButton">
-                    <button type="submit">Update</button>
+                    <button type="submit" name="btnUpdateMember" value="<?= $d->member_id ?>">Update</button>
                     <br>
                     <br>  
                 </div>

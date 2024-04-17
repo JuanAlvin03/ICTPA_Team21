@@ -1,7 +1,9 @@
 <?php
 include_once "../backend/memberCRUD.php";
-
+session_start();
 //cek login info, if no info -> redirect to login
+
+
 
 $data = array();
 

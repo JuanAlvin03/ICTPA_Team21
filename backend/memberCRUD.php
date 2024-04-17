@@ -171,7 +171,7 @@ function createMember($input){
         'member_dob' => $input["memberDOB"],  // date must be checked (less than today)
         'member_gender' => $input["memberGender"],
         'member_address' => $input["memberAddress"],
-        // 'additional_notes' => $input[] //  additional notes, in json?
+        // 'additional_notes' => $input["memberAddInfo"] //  additional notes, in json?
     ];
     
     try{
@@ -190,12 +190,12 @@ function createMember($input){
         */
     }
     catch(Exception $e){
-        return($e->getMessage());
+        return $e->getMessage();
     }
 }
 
 // UPDATE MEMBER
-function updateMember(/*$id*/){
+function updateMember($input){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -208,18 +208,17 @@ function updateMember(/*$id*/){
     
     // DONT EVER UPDATE MEMBER ID
     $updateMember = [
-        'member_first_name' => 'Tom2',
-        'member_last_name' => 'Jefferson2',
-        //'member_dob' => '1950-09-29',  // date must be checked (less than today)
-        //'member_gender' => 'Male',
-        'member_address' => '124 Swanston Street, Melbourne',
-        //'member_status' => 'active', // status is DEFAULT ACTIVE
-        //'member_first_name' => 'Video Games' //  additional notes
+        'member_first_name' => $input["memberFirstName"],
+        'member_last_name' => $input["memberLastName"],
+        'member_dob' => $input["memberDOB"],  // date must be checked (less than today)
+        'member_gender' => $input["memberGender"],
+        'member_address' => $input["memberAddress"],
+        // 'additional_notes' => $input["memberAddInfo"] //  additional notes, in json?
     ];
 
     try{
-        $data = $db->update(6, $updateMember); //the first parameter is the product id
-        print_r($data); //returns an array with the product data (updated)
+        $data = $db->update(intval($input["btnUpdateMember"]), $updateMember); //the first parameter is the id/pk
+        return($data); //returns an array with the product data (updated)
         /*
             Array
             (
@@ -234,7 +233,7 @@ function updateMember(/*$id*/){
         */
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        return $e->getMessage();
     }
 }
 
