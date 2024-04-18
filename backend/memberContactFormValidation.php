@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "memberCRUD.php";
+require_once "memberContactCRUD.php";
 
 // ADD
 if
@@ -17,7 +17,7 @@ if
     // if invalid data, ???????
     
     //It works, will return an array filled with the newly created record, check the memberContactCRUD to see structure of array
-    createMember($_POST);
+    createMemberContact($_POST);
 
     //redirect to memberHome, with success insert message
 
@@ -40,7 +40,7 @@ if
     
     //It works, will return an array filled with the newly updated record, check the memberContactCRUD to see structure of array
     //var_dump($_POST);
-    $update = updateMember($_POST);
+    updateMemberContact($_POST);
 
     //redirect to member Home, with success update message
     /*

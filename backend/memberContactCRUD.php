@@ -36,15 +36,11 @@ function queryMemberContact($member_id){ // param is member id
     ];
     
     try{
-        $listMemberContact = $db->createCustomQuery($query)->getResult();
-        foreach ($listMemberContact as $memberContact){
-            echo $memberContact->member_contact_id . ' - ' . 
-            $memberContact->member_contact_first_name . ' ' . 
-            $memberContact->member_contact_last_name . '<br />';
-        }
+        $MemberContact = $db->createCustomQuery($query)->getResult();
+        return $MemberContact;
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        return $e->getMessage();
     }
 }
 

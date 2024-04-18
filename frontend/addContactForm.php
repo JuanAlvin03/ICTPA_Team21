@@ -4,6 +4,7 @@
     // need to check if member id, first, lastname are set
     
 
+
 ?>
 
 <!DOCTYPE html>
@@ -25,32 +26,11 @@
         <div id="formPage">
 
             <h1 id="mainHeader">Add Member Contacts</h1>
-
-            <!--
-            <div class="nice-form-group">
-               <label>Search</label> 
-              <br>
-              <input type="search" placeholder="Search for Member" value="" style="--nf-input-size: 0.85rem"/>
-            </div>
-
-            <div class="nice-form-group">
-               <label>Search</label> 
-              <br>
-              <input type="search" placeholder="Search for Member" value="" style="--nf-input-size: 0.85rem"/>
-            </div>
-
-            <br>
-
-            <div id="centreMemberButton">
-              <input id="searchMemberButton" type="button" value="Search">
-              <br>
-              <br><hr>
-            </div>-->
             
             <div class="nice-form-group">
                 <label>Member ID:</label>
                 <input type="text" placeholder="" value="MID0001" style="--nf-input-size: 0.5rem" disabled>
-              </div><!-- setup up the MemberID from AWD Assignment -->
+            </div><!-- setup up the MemberID from AWD Assignment -->
 
             <div class="nice-form-group">
                 <label>Member First Name:</label>

@@ -54,6 +54,12 @@
         <div id="formPage">
 
             <h1 id="mainHeader">Member's Detail</h1>
+
+            <div class="nice-form-group">
+                <form action="detailContactForm.php" method="post">
+                    <button type="submit" value="<?= $d->member_id ?>" name="memberID">Contact's Detail</button>
+                </form>
+            </div>
             
             <div class="nice-form-group">
                 <label>Member ID:</label>

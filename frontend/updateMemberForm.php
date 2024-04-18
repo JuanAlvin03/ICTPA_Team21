@@ -55,6 +55,12 @@
 
             <h1 id="mainHeader">Update Member Detail</h1>
 
+            <div class="nice-form-group">
+                <form action="updateContactForm.php" method="post">
+                    <button type="submit" value="<?= $d->member_id ?>" name="memberID">Update Contact's Detail</button>
+                </form>
+            </div>
+
             <!-- FORM -->
             <form action="../backend/memberFormValidation.php" method="post">
                 <!-- MEMBER ID Must Be Disabled-->
