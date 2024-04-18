@@ -49,7 +49,7 @@ function queryMemberContact($member_id){ // param is member id
 }
 
 // INSERT NEW MEMBER CONTACT
-function createMemberContact(){
+function createMemberContact($input){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -62,20 +62,20 @@ function createMemberContact(){
     
     $newMemberContact = [
         // MEMBER CONTACT ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
-        'member_contact_first_name' => 'Kevin',
-        'member_contact_last_name' => 'Smith',
-        'member_contact_phone_number' => '0488756123',  // maybe need to check length
-        'member_contact_email_address' => 'ksmth85@gmail.com',  // need to check if in correct email format or not
-        'member_contact_relationship' => 'Child of member',
-        'member_contact_address' => '300 Glenferrie Road, Hawthorn, Australia',
-        'member_id' => '6', // Foreign KEY
+        'member_contact_first_name' => $input["memberContactFirstName"],
+        'member_contact_last_name' => $input["memberContactLastName"],
+        'member_contact_phone_number' => $input["memberContactPhone"],  // maybe need to check length
+        'member_contact_email_address' => $input["memberContactEmail"],  // need to check if in correct email format or not
+        'member_contact_relationship' => $input["memberContactRelationship"],
+        'member_contact_address' => $input["memberContactAddress"],
+        'member_id' => $input["btnAddContact"], // Foreign KEY
 
         //'member_contact_status' => 'active', // status is DEFAULT ACTIVE
     ];
     
     try{
         $data = $db->insert($newMemberContact);
-        print_r($data); //returns an array with the new register data
+        return $data; //returns an array with the new register data
         /*
             Array
             (
@@ -89,12 +89,12 @@ function createMemberContact(){
         */
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        return $e->getMessage();
     }
 }
 
 // UPDATE MEMBER CONTACT
-function updateMemberContact(/*$id*/){
+function updateMemberContact($input){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -106,19 +106,18 @@ function updateMemberContact(/*$id*/){
     $db = $service->initializeDatabase('member_contact', 'member_contact_id'); //param(tablename, column name of PK)
     
     // DONT EVER UPDATE MEMBER ID
-    $updateMember = [
-        'member_first_name' => 'Tom2',
-        'member_last_name' => 'Jefferson2',
-        //'member_dob' => '1950-09-29',  // date must be checked (less than today)
-        //'member_gender' => 'Male',
-        'member_address' => '124 Swanston Street, Melbourne',
-        //'member_status' => 'active', // status is DEFAULT ACTIVE
-        //'member_first_name' => 'Video Games' //  additional notes
+    $updateContact = [
+        'member_contact_first_name' => $input["memberContactFirstName"],
+        'member_contact_last_name' => $input["memberContactLastName"],
+        'member_contact_phone_number' => $input["memberContactPhone"],  // maybe need to check length
+        'member_contact_email_address' => $input["memberContactEmail"],  // need to check if in correct email format or not
+        'member_contact_relationship' => $input["memberContactRelationship"],
+        'member_contact_address' => $input["memberContactAddress"],
     ];
 
     try{
-        $data = $db->update(6, $updateMember); //the first parameter is the product id
-        print_r($data); //returns an array with the product data (updated)
+        $data = $db->update(intval($input["btnUpdateContact"]), $updateContact); //the first parameter is the product id
+        return $data; //returns an array with the product data (updated)
         /*
             Array
             (
@@ -133,7 +132,7 @@ function updateMemberContact(/*$id*/){
         */
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        return $e->getMessage();
     }
 }
 

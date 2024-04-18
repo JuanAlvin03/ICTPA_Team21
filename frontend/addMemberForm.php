@@ -20,7 +20,6 @@
         <link rel="stylesheet" href="https://unpkg.com/nice-forms.css@0.1.7/dist/nice-forms.css" />   
         <link rel="stylesheet" type="text/css" href="styles/formStyle.css">
         
-        
         <title>Add Member</title>
     </head>
 
