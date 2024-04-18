@@ -1,10 +1,27 @@
 <?php
     //cek login info
-
-    // need to check if member id, first, lastname are set
+    session_start();
     
+    include_once "../backend/memberContactCRUD.php";
+    include_once "../backend/memberCRUD.php";
 
+    // need to check if member id
+    if(isset($_SESSION["temp"]) && isset($_SESSION["msg"])){
 
+        $msg = $_SESSION["msg"];
+        echo "<script>alert('$msg')</script>";
+        $data = queryOneMember($_SESSION["temp"]);
+
+        unset($_SESSION["temp"]);
+        unset($_SESSION["msg"]);
+
+    } else {
+        // memberID not set
+        header("Location: memberHome.php");
+        exit;
+    }
+
+    $d=$data[0];
 ?>
 
 <!DOCTYPE html>
@@ -29,25 +46,25 @@
             
             <div class="nice-form-group">
                 <label>Member ID:</label>
-                <input type="text" placeholder="" value="MID0001" style="--nf-input-size: 0.5rem" disabled>
+                <input type="text" placeholder="" value="<?=$d->member_id?>" style="--nf-input-size: 0.5rem" disabled>
             </div><!-- setup up the MemberID from AWD Assignment -->
 
             <div class="nice-form-group">
                 <label>Member First Name:</label>
-                <input type="text" placeholder="" value="" style="--nf-input-size: 0.5rem" disabled>
+                <input type="text" placeholder="" value="<?=$d->member_first_name?>" style="--nf-input-size: 0.5rem" disabled>
             </div>
 
 
             <div class="nice-form-group">
                 <label>Member Last Name:</label>
-                <input type="text" placeholder="" value="" style="--nf-input-size: 0.5rem" disabled>
+                <input type="text" placeholder="" value="<?=$d->member_last_name?>" style="--nf-input-size: 0.5rem" disabled>
             </div>    
             
             <br>  
             <hr>
 
             <!-- FORM -->
-            <form action="" method="post">
+            <form action="../backend/memberContactFormValidation.php" method="post">
 
                 <div class="nice-form-group">
                     <label>Contact First Name:</label>
@@ -85,7 +102,7 @@
                 <div id="addMemberContactsButton">
                 <div>
                     <!-- set member id as button value-->
-                    <button id="addMember" type="submit" value="" name="btnAddContact">Add Contact</button>
+                    <button id="addMember" type="submit" value="<?=$d->member_id?>" name="btnAddContact">Add Contact</button>
                     <br>
                     <br>
                 </div>

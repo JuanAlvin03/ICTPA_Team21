@@ -17,7 +17,14 @@ if
     // if invalid data, ???????
     
     //It works, will return an array filled with the newly created record, check the memberContactCRUD to see structure of array
-    createMemberContact($_POST);
+    $res = createMemberContact($_POST);
+    if(($res[0]->member_contact_id !== null) && ($res[0]->member_contact_id !== 0)){
+        //redirect to member contact form, with success insert message, and member id
+
+
+        header("Location: ../frontend/memberHome.php");
+        exit;
+    }
 
     //redirect to memberHome, with success insert message
 
@@ -40,16 +47,15 @@ if
     
     //It works, will return an array filled with the newly updated record, check the memberContactCRUD to see structure of array
     //var_dump($_POST);
-    updateMemberContact($_POST);
+    $res = updateMemberContact($_POST);
 
     //redirect to member Home, with success update message
-    /*
-    if($update[0]->id){
-
+    if(($res[0]->member_contact_id !== null) && ($res[0]->member_contact_id !== 0)){
+        //redirect to member contact form, with success insert message, and member id
+        //$_SESSION["msg"] = "New member has been created successfully";
+        header("Location: ../frontend/memberHome.php");
+        exit;
     }
-    $_SESSION["msg"] = "";
-    header("Location: memberHome.php");
-*/
     //if error, go back to member form
 }
 

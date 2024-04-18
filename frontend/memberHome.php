@@ -3,8 +3,6 @@ include_once "../backend/memberCRUD.php";
 session_start();
 //cek login info, if no info -> redirect to login
 
-
-
 $data = array();
 
 if(isset($_GET["searchMember"])){
@@ -272,4 +270,4 @@ function openNav() {
 </script>
 
 </body>
-</html> 
+</html>
