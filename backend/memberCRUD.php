@@ -61,7 +61,7 @@ function searchMembers($param){
     if(is_numeric($param)){
         if(intval($param) > 0){
             $query = [
-                'select' => 'member_id,member_first_name,member_last_name,member_dob',
+                'select' => 'member_id,member_first_name,member_last_name,member_dob,member_address',
                 'from'   => 'member',
                 'where' => 
                 [
@@ -79,7 +79,7 @@ function searchMembers($param){
     } 
     else {
         $query = [
-            'select' => 'member_id,member_first_name,member_last_name,member_dob',
+            'select' => 'member_id,member_first_name,member_last_name,member_dob,member_address',
             'from'   => 'member',
             'where' => 
             [
@@ -95,7 +95,7 @@ function searchMembers($param){
         }
     
         $query = [
-            'select' => 'member_id,member_first_name,member_last_name,member_dob',
+            'select' => 'member_id,member_first_name,member_last_name,member_dob,member_address',
             'from'   => 'member',
             'where' => 
             [

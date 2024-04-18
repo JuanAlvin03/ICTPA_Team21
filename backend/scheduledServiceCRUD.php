@@ -75,7 +75,7 @@ function queryOneScheduledService(){
 }
 
 // INSERT SCHEDULED SERVICE
-function createScheduledService(){
+function createScheduledService($input){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -86,19 +86,16 @@ function createScheduledService(){
 
     $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
     
-    $newMember = [
+    $newService = [
         // MEMBER ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
-        'member_first_name' => 'Sammy',
-        'member_last_name' => 'Samson',
-        'member_dob' => '1954-11-29',  // date must be checked (less than today)
-        'member_gender' => 'Male',
-        'member_address' => '1 Burwood Road, Melbourne, Australia',
-        //'member_status' => 'active', // status is DEFAULT ACTIVE
-        //'member_first_name' => 'Video Games' //  additional notes
+        'service_start_date_time' => 'Sammy',
+        'service_location_address' => 'Samson',
+        'service_id' => '1954-11-29',  // date must be checked (less than today)
+        'member_id' => 'Male',
     ];
     
     try{
-        $data = $db->insert($newMember);
+        $data = $db->insert($newService);
         print_r($data); //returns an array with the new register data
         /*
             Array
