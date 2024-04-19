@@ -88,15 +88,15 @@ function createScheduledService($input){
     
     $newService = [
         // MEMBER ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
-        'service_start_date_time' => 'Sammy',
-        'service_location_address' => 'Samson',
-        'service_id' => '1954-11-29',  // date must be checked (less than today)
-        'member_id' => 'Male',
+        'service_start_date_time' => $input["date"] . " " . $input["time"] . ":00",
+        'service_location_address' => $input["address"],
+        'service_id' => $input["serviceLoc"],  // date must be checked (less than today)
+        'member_id' => $input["btnSubmit"],
     ];
     
     try{
         $data = $db->insert($newService);
-        print_r($data); //returns an array with the new register data
+        return $data; //returns an array with the new register data
         /*
             Array
             (
@@ -110,7 +110,7 @@ function createScheduledService($input){
         */
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        return $e->getMessage();
     }
 }
 

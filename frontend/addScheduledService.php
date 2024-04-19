@@ -3,7 +3,13 @@
 include_once "../backend/memberCRUD.php";
 $todayDate = date("Y-m-d");
 $data = array();
-
+/*
+if(isset($_POST["date"]) && isset($_POST["time"])){
+    echo $_POST["date"];
+    echo "<br>";
+    echo $_POST["time"];
+}
+*/
 $id = "";
 $first = "";
 $last = "";
@@ -73,8 +79,8 @@ if($type == 2){$address="-"; $check = array("", "checked");};
             <hr>
 
             <br>
-
-            <form action="" method="post">
+<!-- ../backend/scheduledServicesValidation.php -->
+            <form action="../backend/scheduledServicesValidation.php" method="post">
             <label>Please select service options:</label>  
             <fieldset class="nice-form-group">
                 <div class="nice-form-group">
@@ -147,17 +153,17 @@ if($type == 2){$address="-"; $check = array("", "checked");};
 
             <div class="nice-form-group">
                 <label>Service Address:</label>
-                <input type="text" placeholder="Last Name" value="<?=$address?>" style="--nf-input-size: 0.5rem"/>
+                <input type="text" placeholder="Last Name" value="<?=$address?>" style="--nf-input-size: 0.5rem" name="address">
             </div>
 
             <div class="nice-form-group">
                 <label>Date</label>
-                <input type="date" value="<?=$todayDate?>" min="<?=$todayDate?>" style="--nf-input-size: 0.5rem"/>
+                <input type="date" value="<?=$todayDate?>" min="<?=$todayDate?>" style="--nf-input-size: 0.5rem" name="date">
             </div>
             
             <div class="nice-form-group">
                 <label>Time</label>
-                <input type="time" value="00:00" style="--nf-input-size: 0.5rem"/>
+                <input type="time" value="00:00" style="--nf-input-size: 0.5rem" name="time">
             </div>
 
             
@@ -168,7 +174,7 @@ if($type == 2){$address="-"; $check = array("", "checked");};
 
             <br>
               <div id="addServiceButton">
-                <button id="addMemberService" type="submit" value="">Schedule Service</button>
+                <button id="addMemberService" type="submit" value="<?=$id?>" name="btnSubmit">Schedule Service</button>
                 <br>
               </div>
             </form>
