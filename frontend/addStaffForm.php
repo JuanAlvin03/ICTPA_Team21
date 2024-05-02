@@ -25,7 +25,7 @@ $todayDate = date("Y-m-d");
 
             <h1 id="mainHeader">Add New Staff Details</h1>
 
-            <form action="" method="post">
+            <form action="../backend/staffValidation.php" method="post">
 
             
             <div class="nice-form-group">

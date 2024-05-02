@@ -5,17 +5,16 @@ require "vendor/autoload.php";
 
 NEEDED FUNCTIONS:
 
-- Query All members (not sure when to use this, whats needed is probably list of members that has some special req or list filtered/searched using search bar)
-- Query some members (for search bar???? or some kind of filtering) (not created yet)
-- Get One Member (must)
+- Query All staff 
+- Get One staff (must)
 - Create (must)
 - Update (must)
 - Delete (we dont have status attr yet, or hard delete) (must)
 
 */
 
-// GET MEMBER
-function queryMembers(){
+// GET STAFF
+function queryStaffs(){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -24,25 +23,23 @@ function queryMembers(){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('staff', 'staff_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'member_id,member_first_name,member_last_name',
-        'from'   => 'member'
+        'select' => '*',
+        'from'   => 'staff'
     ];
     
     try{
         $listMember = $db->createCustomQuery($query)->getResult();
-        foreach ($listMember as $member){
-            echo $member->member_id . ' - ' . $member->member_first_name . ' ' . $member->member_last_name . '<br />';
-        }
+        return $listMember;
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        return $e->getMessage();
     }
 }
 
-// SEARCH MEMBERS BY ID OR NAME (FIRST OR LAST)
+// SEARCH STAFF BY ID OR NAME (FIRST OR LAST)
 function searchMembers($param){
 
     $service = new PHPSupabase\Service(
@@ -120,8 +117,8 @@ function searchMembers($param){
     return $listMember;
 }
 
-// GET ONE MEMBER (BASED ON ID)
-function queryOneMember($id){
+// GET ONE STAFF (BASED ON ID)
+function queryOneStaff($id){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -130,20 +127,20 @@ function queryOneMember($id){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('staff', 'staff_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'member_id,member_first_name,member_last_name,member_dob,member_address,member_gender',
-        'from'   => 'member',
+        'select' => '*',
+        'from'   => 'staff',
         'where' => 
         [
-            'member_id' => 'eq.' . intval($id)
+            'staff_id' => 'eq.' . intval($id)
         ]
     ];
     
     try{
-        $member = $db->createCustomQuery($query)->getResult();
-        return $member;
+        $queryResult = $db->createCustomQuery($query)->getResult();
+        return $queryResult;
     }
     catch(Exception $e){
         //echo $e->getMessage();
@@ -151,8 +148,8 @@ function queryOneMember($id){
     }
 }
 
-// INSERT NEW MEMBER
-function createMember($input){
+// INSERT NEW Staff
+function createStaff($input){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -161,20 +158,24 @@ function createMember($input){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('staff', 'staff_id'); //param(tablename, column name of PK)
     
-    $newMember = [
-        // MEMBER ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
-        'member_first_name' => $input["memberFirstName"],
-        'member_last_name' => $input["memberLastName"],
-        'member_dob' => $input["memberDOB"],  // date must be checked (less than today)
-        'member_gender' => $input["memberGender"],
-        'member_address' => $input["memberAddress"],
-        // 'additional_notes' => $input["memberAddInfo"] //  additional notes, in json?
+    $insert = [
+        //ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
+        'staff_first_name' => $input["firstName"],
+        'staff_last_name' => $input["lastName"],
+        'staff_dob' => $input["dob"],
+        'staff_gender' => $input["gender"],
+        'staff_address' => $input["address"],
+        'staff_phone_number' => $input["phone"],
+        'staff_email' => $input["email"],
+        'position' => $input["position"],
+        'staff_employment_type' => $input["employmentType"],
+        'manager_id' => $input["managerID"], // must be int
     ];
     
     try{
-        $data = $db->insert($newMember);
+        $data = $db->insert($insert);
         return($data); //returns an array with the new register data
         /*
             Array
@@ -193,8 +194,8 @@ function createMember($input){
     }
 }
 
-// UPDATE MEMBER
-function updateMember($input){
+// UPDATE staff
+function updateStaff($input){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -203,20 +204,25 @@ function updateMember($input){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('staff', 'staff_id'); //param(tablename, column name of PK)
     
-    // DONT EVER UPDATE MEMBER ID
-    $updateMember = [
-        'member_first_name' => $input["memberFirstName"],
-        'member_last_name' => $input["memberLastName"],
-        'member_dob' => $input["memberDOB"],  // date must be checked (less than today)
-        'member_gender' => $input["memberGender"],
-        'member_address' => $input["memberAddress"],
-        // 'additional_notes' => $input["memberAddInfo"] //  additional notes, in json?
+    // DONT EVER UPDATE ID
+    $update = [
+        //ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
+        'staff_first_name' => $input["firstName"],
+        'staff_last_name' => $input["lastName"],
+        'staff_dob' => $input["dob"],
+        'staff_gender' => $input["gender"],
+        'staff_address' => $input["address"],
+        'staff_phone_number' => $input["phone"],
+        'staff_email' => $input["email"],
+        'position' => $input["position"],
+        'staff_employment_type' => $input["employmentType"],
+        'manager_id' => $input["managerID"],
     ];
 
     try{
-        $data = $db->update(intval($input["btnUpdateMember"]), $updateMember); //the first parameter is the id/pk
+        $data = $db->update(intval($input["btnUpdate"]), $update); //the first parameter is the id/pk
         return($data); //returns an array with the product data (updated)
         /*
             Array
@@ -236,8 +242,8 @@ function updateMember($input){
     }
 }
 
-// DELETE MEMBER
-function deleteMember($id){
+// DELETE Staff
+function deleteStaff($id){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -246,7 +252,7 @@ function deleteMember($id){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('staff', 'staff_id'); //param(tablename, column name of PK)
 
     // IF SOFT DELETE, UPDATE STATUS TO INACTIVE
     

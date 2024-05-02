@@ -44,7 +44,7 @@ function queryWork(){
 */
 
 // GET ONE work schedule (BASED ON ID)
-function queryOneWork($id){
+function queryOneAvailability($id){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -53,7 +53,7 @@ function queryOneWork($id){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('work_schedule', 'work_schedule_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('staff_availability', 'staff_availability_id'); //param(tablename, column name of PK)
     
     $query = [
         'select' => '*',
@@ -75,7 +75,7 @@ function queryOneWork($id){
 }
 
 // INSERT WORK SCHEDULE
-function createWork($input){
+function createAvailability($input){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -84,12 +84,24 @@ function createWork($input){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('work_schedule', 'work_schedule_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('staff_availability', 'staff_availability_id'); //param(tablename, column name of PK)
     
     $insert = [
         //ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
-        'start' => $input["dateStart"] . " " . $input["timeStart"] . ":00",
-        'end' => $input["dateEnd"] . " " . $input["timeEnd"] . ":00",
+        'mon_start' => $input["mons"] . ":00",
+        'mon_end' => $input["mone"] . ":00",
+        'tue_start' => $input["tues"] . ":00",
+        'tue_end' => $input["tuee"] . ":00",
+        'wed_start' => $input["weds"] . ":00",
+        'wed_end' => $input["wede"] . ":00",
+        'thu_start' => $input["thus"] . ":00",
+        'thu_end' => $input["thue"] . ":00",
+        'fri_start' => $input["fris"] . ":00",
+        'fri_end' => $input["frie"] . ":00",
+        'sat_start' => $input["sats"] . ":00",
+        'sat_end' => $input["sate"] . ":00",
+        'sun_start' => $input["suns"] . ":00",
+        'sun_end' => $input["sune"] . ":00",
         'staff_id' => $input["btnSubmit"],
     ];
     
@@ -114,7 +126,7 @@ function createWork($input){
 }
 
 // UPDATE MEMBER
-function updateWork($input){
+function updateAvailability($input){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -123,7 +135,7 @@ function updateWork($input){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('work_schedule', 'work_schedule_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('staff_availability', 'staff_availability_id'); //param(tablename, column name of PK)
     
     // DONT EVER UPDATE MEMBER ID
     $updateMember = [
@@ -151,29 +163,6 @@ function updateWork($input){
     }
     catch(Exception $e){
         return $e->getMessage();
-    }
-}
-
-// DELETE MEMBER
-function deleteWork($id){
-
-    $service = new PHPSupabase\Service(
-        // PROJECT API KEY
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnemZrd3F3b29ia2F2YnhveHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5Nzc1MTcsImV4cCI6MjAyNjU1MzUxN30.0EG7AWB6TsRMqTssMS9bhf0plepaG1EPpMiX1jW8aUE", 
-        // PROJECT URL
-        "https://egzfkwqwoobkavbxoxry.supabase.co"
-    );
-
-    $db = $service->initializeDatabase('work_schedule', 'work_schedule_id'); //param(tablename, column name of PK)
-
-    // IF SOFT DELETE, UPDATE STATUS TO INACTIVE
-    
-    try{
-        $data = $db->delete($id); //the parameter is the product id
-        echo 'Product deleted successfully';
-    }
-    catch(Exception $e){
-        echo $e->getMessage();
     }
 }
 

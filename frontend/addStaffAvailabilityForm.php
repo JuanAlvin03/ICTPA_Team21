@@ -1,3 +1,8 @@
+<?php
+
+//set staff id
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,7 +40,7 @@
               <input type="text" disabled placeholder="" value="" style="--nf-input-size: 0.5rem"/>
             </div>
 
-            <form action="" method="post">
+            <form action="../backend/staffAvailabilityValidation.php" method="post">
 
             <div id="centeringID" class="nice-form-group">
               <label>Monday:</label>
@@ -86,7 +91,7 @@
 
             <div id="addMemberButton">
                 <div>
-                    <button id="addMember" type="button" value="Add Staff Schedule" name="btnSubmit">Set Availability</button>
+                    <button id="addMember" type="submit" value="1" name="btnSubmit">Set Availability</button>
                     <br>
                     <br>
                 </div>
