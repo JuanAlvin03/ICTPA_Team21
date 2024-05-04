@@ -117,6 +117,14 @@ $todayDate = date("Y-m-d");
             </div>
 
             </form>
+
+            <!-- Back Button -->
+            <div id="addMemberButton">
+              <form action="staffHome.php">
+                <button type="submit">Back</button>
+              </form>
+            </div>
+            
     </body>
 </html>       
 

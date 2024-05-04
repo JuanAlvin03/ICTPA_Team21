@@ -74,6 +74,12 @@ if(isset($_POST["btnSubmit"]))
 
             </form>
 
+            <!-- Back Button -->
+            <div id="addMemberButton">
+              <form action="staffHome.php">
+                <button type="submit">Back</button>
+              </form>
+            </div>
     </body>
 </html>       
 

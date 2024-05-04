@@ -51,44 +51,44 @@ $ava = queryOneAvailability($_POST["btnChange"])[0];
 
             <div id="centeringID" class="nice-form-group">
               <label>Monday:</label>
-              <input type="time" value="09:00" style="--nf-input-size: 0.5rem" name="mons"> to
-              <input type="time" value="17:00" style="--nf-input-size: 0.5rem" name="mone">
+              <input type="time" value="<?=$ava->mon_start?>" style="--nf-input-size: 0.5rem" name="mons"> to
+              <input type="time" value="<?=$ava->mon_end?>" style="--nf-input-size: 0.5rem" name="mone">
             </div>
 
             <div id="centeringID" class="nice-form-group">
               <label>Tuesday:</label>
-              <input type="time" value="09:00" style="--nf-input-size: 0.5rem" name="tues"> to
-              <input type="time" value="17:00" style="--nf-input-size: 0.5rem" name="tuee">
+              <input type="time" value="<?=$ava->tue_start?>" style="--nf-input-size: 0.5rem" name="tues"> to
+              <input type="time" value="<?=$ava->tue_end?>" style="--nf-input-size: 0.5rem" name="tuee">
             </div>
 
             <div id="centeringID" class="nice-form-group">
               <label>Wednesday:</label>
-              <input type="time" value="09:00" style="--nf-input-size: 0.5rem" name="weds"> to
-              <input type="time" value="17:00" style="--nf-input-size: 0.5rem" name="wede">
+              <input type="time" value="<?=$ava->wed_start?>" style="--nf-input-size: 0.5rem" name="weds"> to
+              <input type="time" value="<?=$ava->wed_end?>" style="--nf-input-size: 0.5rem" name="wede">
             </div>
 
             <div id="centeringID" class="nice-form-group">
               <label>Thursday:</label>
-              <input type="time" value="09:00" style="--nf-input-size: 0.5rem" name="thus"> to
-              <input type="time" value="17:00" style="--nf-input-size: 0.5rem" name="thue">
+              <input type="time" value="<?=$ava->thu_start?>" style="--nf-input-size: 0.5rem" name="thus"> to
+              <input type="time" value="<?=$ava->thu_end?>" style="--nf-input-size: 0.5rem" name="thue">
             </div>
 
             <div id="centeringID" class="nice-form-group">
               <label>Friday:</label>
-              <input type="time" value="09:00" style="--nf-input-size: 0.5rem" name="fris"> to
-              <input type="time" value="17:00" style="--nf-input-size: 0.5rem" name="frie">
+              <input type="time" value="<?=$ava->fri_start?>" style="--nf-input-size: 0.5rem" name="fris"> to
+              <input type="time" value="<?=$ava->fri_end?>" style="--nf-input-size: 0.5rem" name="frie">
             </div>
 
             <div id="centeringID" class="nice-form-group">
               <label>Saturday:</label>
-              <input type="time" value="09:00" style="--nf-input-size: 0.5rem" name="sats"> to
-              <input type="time" value="17:00" style="--nf-input-size: 0.5rem" name="sate">
+              <input type="time" value="<?=$ava->sat_start?>" style="--nf-input-size: 0.5rem" name="sats"> to
+              <input type="time" value="<?=$ava->sat_end?>" style="--nf-input-size: 0.5rem" name="sate">
             </div>
 
             <div id="centeringID" class="nice-form-group">
               <label>Sunday:</label>
-              <input type="time" value="09:00" style="--nf-input-size: 0.5rem" name="suns"> to
-              <input type="time" value="17:00" style="--nf-input-size: 0.5rem" name="sune">
+              <input type="time" value="<?=$ava->sun_start?>" style="--nf-input-size: 0.5rem" name="suns"> to
+              <input type="time" value="<?=$ava->sun_end?>" style="--nf-input-size: 0.5rem" name="sune">
             </div>
 
 
@@ -98,7 +98,7 @@ $ava = queryOneAvailability($_POST["btnChange"])[0];
 
             <div id="addMemberButton">
                 <div>
-                    <button id="addMember" type="submit" value="<?=$ava->staff_availability_id?>" name="btnSubmit">Set Availability</button>
+                    <button id="addMember" type="submit" value="<?=$ava->staff_availability_id?>" name="btnUpdate">Update Availability</button>
                     <br>
                     <br>
                 </div>
