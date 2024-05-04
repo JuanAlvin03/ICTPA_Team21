@@ -18,7 +18,6 @@ if(!isset($_SESSION["newStaffID"])){
         <link rel="stylesheet" href="https://unpkg.com/nice-forms.css@0.1.7/dist/nice-forms.css" />   
         <link rel="stylesheet" type="text/css" href="styles/formStyle.css">
         
-        
         <title>Staff Availability Schedule</title>
     </head>
 
@@ -88,9 +87,6 @@ if(!isset($_SESSION["newStaffID"])){
               <input type="time" value="09:00" style="--nf-input-size: 0.5rem" name="suns"> to
               <input type="time" value="17:00" style="--nf-input-size: 0.5rem" name="sune">
             </div>
-
-
-
 
             <br>
 

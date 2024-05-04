@@ -1,4 +1,15 @@
 <?php 
+session_start();
+
+if(!isset($_SESSION["user"])){
+  header("Location: ../frontend/login.php");
+  exit;
+}
+
+if(!isset($_SESSION["staff"])){
+  header("Location: ../frontend/login.php");
+  exit;
+}
 
 ?>
 
@@ -33,7 +44,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     </div>
   </div>
   <!--Log out must redirect to logout page to actually logout and stuff and then redirect to login page -->
-  <a href="login.php" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">
+  <a href="../backend/logout.php" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">
     Logout
   </a>
  </div>
