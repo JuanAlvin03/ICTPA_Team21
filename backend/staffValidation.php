@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once "staffCRUD.php";
 
 // ADD
@@ -16,7 +18,13 @@ if
     
     //It works, will return an array filled with the newly created record, check the memberCRUD to see structure of array
     $res = createStaff($_POST);
-    echo $res;
+    
+    $_SESSION["newStaffID"] = $res[0]->staff_id;
+
+    header("Location: ../frontend/addStaffAvailabilityForm.php");
+    exit;
+
+
     /*
     if(($res[0]->member_id !== null) && ($res[0]->member_id !== 0)){
         //redirect to member contact form, with success insert message, and member id

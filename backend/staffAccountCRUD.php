@@ -62,9 +62,8 @@ function queryOneAccount($username){
     }
 }
 
-// INSERT WORK SCHEDULE
-/*
-function createWork($input){
+// Create Account
+function createAccount($input){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -73,13 +72,13 @@ function createWork($input){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('work_schedule', 'work_schedule_id'); //param(tablename, column name of PK)
+    $db = $service->initializeDatabase('staff_account', 'account_id'); //param(tablename, column name of PK)
     
     $insert = [
         //ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
-        'start' => $input["dateStart"] . " " . $input["timeStart"] . ":00",
-        'end' => $input["dateEnd"] . " " . $input["timeEnd"] . ":00",
-        'staff_id' => $input["btnSubmit"],
+        'account_name' => $input["account_name"],
+        'account_password' => $input["account_password"],
+        'staff_id' => $input["staff_id"],
     ];
     
     try{
@@ -90,7 +89,7 @@ function createWork($input){
         return $e->getMessage();
     }
 }
-*/
+
 
 // UPDATE MEMBER
 /*

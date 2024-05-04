@@ -1,13 +1,11 @@
 <?php
 
-require_once "../backend/staffAvailabilityCRUD.php";
+session_start();
 
-if(!isset($_POST["btnChange"])){
+if(!isset($_SESSION["newStaffID"])){
   header("Location: staffHome.php");
   exit;
 }
-
-$ava = queryOneAvailability($_POST["btnChange"])[0];
 
 ?>
 <!DOCTYPE html>
@@ -30,11 +28,11 @@ $ava = queryOneAvailability($_POST["btnChange"])[0];
 
         <div id="formPage">
           
-            <h1 id="mainHeader">Update Availability</h1>
+            <h1 id="mainHeader">Set Availability</h1>
             
             <div class="nice-form-group">
               <label>Staff ID:</label>
-              <input type="text" disabled placeholder="" value="<?=$_POST["btnChange"]?>" style="--nf-input-size: 0.5rem"/>
+              <input type="text" disabled placeholder="" value="<?=$_SESSION["newStaffID"]?>" style="--nf-input-size: 0.5rem"/>
             </div>
 <!--
             <div class="nice-form-group">
@@ -98,7 +96,7 @@ $ava = queryOneAvailability($_POST["btnChange"])[0];
 
             <div id="addMemberButton">
                 <div>
-                    <button id="addMember" type="submit" value="<?=$ava->staff_availability_id?>" name="btnSubmit">Set Availability</button>
+                    <button id="addMember" type="submit" value="<?=$_SESSION["newStaffID"]?>" name="btnSubmit">Set Availability</button>
                     <br>
                     <br>
                 </div>

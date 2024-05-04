@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once "staffAvailabilityCRUD.php";
+require_once "staffAccountCRUD.php";
 
 // ADD
 if
-(isset($_POST["btnSubmit"])
+(isset($_SESSION["newStaffID"])
            // && isset($_POST["memberFirstName"])
             //&& isset($_POST["memberLastName"])
             //&& isset($_POST["memberDOB"])
@@ -16,8 +16,15 @@ if
     // if invalid data, ???????
     
     //It works, will return an array filled with the newly created record, check the memberCRUD to see structure of array
-    $res = createAvailability($_POST);
-    header("Location: staffAccountValidation.php");
+    $input = array();
+    $input = [
+        "account_name" => "account" . $_SESSION["newStaffID"],
+        "account_password" => "account" . $_SESSION["newStaffID"],
+        "staff_id" => $_SESSION["newStaffID"],
+    ];
+
+    $res = createAccount($input);
+    header("Location: ../frontend/staffHome.php");
     exit;
     /*
     if(($res[0]->member_id !== null) && ($res[0]->member_id !== 0)){
