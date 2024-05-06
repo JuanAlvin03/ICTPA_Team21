@@ -3,6 +3,8 @@
 // set staff id for button and also other info for text box
 $todayDate = date("Y-m-d");
 if(isset($_POST["btnSubmit"]))
+
+
 ?>
 
 <!DOCTYPE html>

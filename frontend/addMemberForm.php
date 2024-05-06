@@ -80,7 +80,79 @@
                 <div class="nice-form-group">
                     <label>Address</label>
                     <input type="text" placeholder="" value="" style="--nf-input-size: 0.5rem" id="memberAddress" name="memberAddress">
-                </div>            
+                </div>         
+                
+                <!-- MEDICAL CONDITIONS -->
+                <fieldset class="nice-form-group">
+                    <legend>Medical Conditions</legend>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Coronary Artery Disease (CAD)" name="medicalConditions[]" value="Coronary Artery Disease (CAD)">
+                        <label for="heartDisease">Coronary Artery Disease (CAD)</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="asthma" name="medicalConditions[]" value="Asthma">
+                        <label for="asthma">Asthma</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="hypertension" name="medicalConditions[]" value="Hypertension">
+                        <label for="hypertension">Hypertension</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="amnesia" name="medicalConditions[]" value="Amnesia">
+                        <label for="amnesia">Amnesia</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Diabetes" name="medicalConditions[]" value="Diabetes">
+                        <label for="Diabetes">Diabetes</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Osteoarthritis" name="medicalConditions[]" value="Osteoarthritis">
+                        <label for="Osteoarthritis">Osteoarthritis</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Gastroesophageal Reflux Disease (GERD)" name="medicalConditions[]" value="Gastroesophageal Reflux Disease (GERD)">
+                        <label for="Gastroesophageal Reflux Disease (GERD)">Gastroesophageal Reflux Disease (GERD)</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="text" id="otherCondition" name="medicalConditions[]" placeholder="Other Medical Condition" class="input-field" style="--nf-input-size: 0.5rem">
+                    </div>
+                </fieldset>
+
+                <!-- Allergy -->
+                <fieldset class="nice-form-group">
+                    <legend>Allergies</legend>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Nuts" name="allergy[]" value="Nuts">
+                        <label for="Nuts">Nuts</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Gluten" name="allergy[]" value="Gluten">
+                        <label for="Gluten">Gluten</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Lactose Intolerant" name="allergy[]" value="Lactose Intolerant">
+                        <label for="Lactose Intolerant">Lactose Intolerant</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Shellfish" name="allergy[]" value="Shellfish">
+                        <label for="Shellfish">Shellfish</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Eggs" name="allergy[]" value="Eggs">
+                        <label for="Eggs">Eggs</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Pollen" name="allergy[]" value="Pollen">
+                        <label for="Pollen">Pollen</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="checkbox" id="Dust" name="allergy[]" value="Dust">
+                        <label for="Dust">Dust</label>
+                    </div>
+                    <div class="nice-form-group">
+                        <input type="text" id="otherallergy" name="allergy[]" placeholder="Other Allergy" class="input-field" style="--nf-input-size: 0.5rem">
+                    </div>
+                </fieldset>
 
                 <!-- ADDITIONAL INFORMATION -->
                 <div class="nice-form-group">

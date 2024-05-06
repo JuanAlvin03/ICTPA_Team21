@@ -288,7 +288,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 </footer>
 
 <footer class="w3-container w3-theme-d5">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Team 21</a></p>
+  <p>Powered by Team 21</p>
 </footer>
  
 <script>

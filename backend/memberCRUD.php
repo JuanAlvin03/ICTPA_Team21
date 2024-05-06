@@ -134,7 +134,7 @@ function queryOneMember($id){
     $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'member_id,member_first_name,member_last_name,member_dob,member_address,member_gender',
+        'select' => '*',
         'from'   => 'member',
         'where' => 
         [
@@ -163,6 +163,20 @@ function createMember($input){
     );
 
     $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
+
+    $name1 = $_POST['medicalConditions'];
+    $name2 = $_POST['allergy'];
+
+    $allergy = "";
+    $medicalCondition = "";
+
+    foreach($name1 as $med){
+        $medicalCondition = $medicalCondition . $med . ";";
+    }
+
+    foreach($name2 as $aller){
+        $allergy = $allergy . $aller . ";";
+    }
     
     $newMember = [
         // MEMBER ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
@@ -171,6 +185,8 @@ function createMember($input){
         'member_dob' => $input["memberDOB"],  // date must be checked (less than today)
         'member_gender' => $input["memberGender"],
         'member_address' => $input["memberAddress"],
+        'allergy' => $allergy,
+        'sickness' => $medicalCondition,
         // 'additional_notes' => $input["memberAddInfo"] //  additional notes, in json?
     ];
     
@@ -206,6 +222,20 @@ function updateMember($input){
 
     $db = $service->initializeDatabase('member', 'member_id'); //param(tablename, column name of PK)
     
+    $name1 = $_POST['medicalConditions'];
+    $name2 = $_POST['allergy'];
+
+    $allergy = "";
+    $medicalCondition = "";
+
+    foreach($name1 as $med){
+        $medicalCondition = $medicalCondition . $med . ";";
+    }
+
+    foreach($name2 as $aller){
+        $allergy = $allergy . $aller . ";";
+    }
+
     // DONT EVER UPDATE MEMBER ID
     $updateMember = [
         'member_first_name' => $input["memberFirstName"],
@@ -213,6 +243,8 @@ function updateMember($input){
         'member_dob' => $input["memberDOB"],  // date must be checked (less than today)
         'member_gender' => $input["memberGender"],
         'member_address' => $input["memberAddress"],
+        'allergy' => $allergy,
+        'sickness' => $medicalCondition,
         // 'additional_notes' => $input["memberAddInfo"] //  additional notes, in json?
     ];
 

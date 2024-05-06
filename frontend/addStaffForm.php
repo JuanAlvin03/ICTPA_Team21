@@ -1,5 +1,16 @@
 <?php
 $todayDate = date("Y-m-d");
+
+if(!isset($_SESSION["user"])){
+  header("Location: ../frontend/login.php");
+  exit;
+}
+
+if(!isset($_SESSION["staff"])){
+  header("Location: ../frontend/login.php");
+  exit;
+}
+
 ?>
 
 <!DOCTYPE html>
