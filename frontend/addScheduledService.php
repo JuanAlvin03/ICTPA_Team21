@@ -3,13 +3,7 @@
 include_once "../backend/memberCRUD.php";
 $todayDate = date("Y-m-d");
 $data = array();
-/*
-if(isset($_POST["date"]) && isset($_POST["time"])){
-    echo $_POST["date"];
-    echo "<br>";
-    echo $_POST["time"];
-}
-*/
+
 $id = "";
 $first = "";
 $last = "";
@@ -56,7 +50,7 @@ if($type == 2){$address="-"; $check = array("", "checked");};
             <div class="nice-form-group">
                 <label>Member ID:</label>
                 <input type="text" disabled placeholder="" value="<?=$id?>" style="--nf-input-size: 0.5rem"/>
-              </div><!-- setup up the MemberID from AWD Assignment -->
+              </div>
 
             <div class="nice-form-group">
                 <label>Member First Name:</label>
@@ -76,7 +70,6 @@ if($type == 2){$address="-"; $check = array("", "checked");};
             </div>-->
 
             <br>
-            <hr>
 
             <br>
 <!-- ../backend/scheduledServicesValidation.php -->
@@ -131,23 +124,18 @@ if($type == 2){$address="-"; $check = array("", "checked");};
             </fieldset>
 
             <br>
-            <!--
-            <div class="nice-form-group">
-                <label>Assign Staff Member to Service:</label>
-                <input type="search" placeholder="Search Staff Directory" value="" />
-            </div>-->
 
             <!-- Service Location -->
             <fieldset class="nice-form-group">
                 <legend>Service Type</legend>
                 <div class="nice-form-group">
-                  <input type="radio" name="serviceLoc" id="Male" value="1" <?=$check[0]?>>
-                  <label for="Male">In-Home</label>
+                  <input type="radio" name="serviceLoc" value="1" <?=$check[0]?>>
+                  <label for="in-home">In-Home</label>
                 </div>
 
                 <div class="nice-form-group">
-                  <input type="radio" name="serviceLoc" id="Female" value="2" <?=$check[1]?>>
-                  <label for="Female">Residential</label>
+                  <input type="radio" name="serviceLoc" value="2" <?=$check[1]?>>
+                  <label for="residential">Residential</label>
                 </div>
             </fieldset>
 
