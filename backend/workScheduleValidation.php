@@ -16,7 +16,8 @@ if
     
     //It works, will return an array filled with the newly created record, check the memberCRUD to see structure of array
     $res = createWork($_POST);
-    var_dump($res);
+    header("Location: ../frontend/staffHome.php");
+    exit;
     /*
     if(($res[0]->member_id !== null) && ($res[0]->member_id !== 0)){
         //redirect to member contact form, with success insert message, and member id

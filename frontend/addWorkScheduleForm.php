@@ -1,9 +1,25 @@
 <?php
-
+session_start();
+require_once "../backend/staffCRUD.php";
 // set staff id for button and also other info for text box
 $todayDate = date("Y-m-d");
-if(isset($_POST["btnSubmit"]))
 
+if(!isset($_SESSION["user"])){
+  header("Location: login.php");
+  exit;
+}
+
+if(!isset($_SESSION["staff"])){
+  header("Location: login.php");
+  exit;
+}
+
+if(!isset($_POST["btnSubmit"])){
+  header("Location: preAddWorkScheduleForm.php");
+  exit;
+}
+
+$d = queryOneStaff($_POST["btnSubmit"])[0];
 
 ?>
 
@@ -31,17 +47,17 @@ if(isset($_POST["btnSubmit"]))
             
             <div class="nice-form-group">
               <label>Staff ID:</label>
-              <input type="text" disabled placeholder="" value="MID2233" style="--nf-input-size: 0.5rem">
+              <input type="text" disabled placeholder="" value="<?=$_POST["btnSubmit"]?>" style="--nf-input-size: 0.5rem">
             </div>
 
             <div class="nice-form-group">
               <label>Staff First Name:</label>
-              <input type="text" disabled placeholder="" value="" style="--nf-input-size: 0.5rem"/>
+              <input type="text" disabled placeholder="" value="<?=$d->staff_first_name?>" style="--nf-input-size: 0.5rem"/>
             </div>
 
             <div class="nice-form-group">
               <label>Staff Last Name:</label>
-              <input type="text" disabled placeholder="" value="" style="--nf-input-size: 0.5rem"/>
+              <input type="text" disabled placeholder="" value="<?=$d->staff_last_name?>" style="--nf-input-size: 0.5rem"/>
             </div>
 
             <form action="../backend/workScheduleValidation.php" method="post">
@@ -68,7 +84,7 @@ if(isset($_POST["btnSubmit"]))
 
             <div id="addMemberButton">
                 <div>
-                    <button id="addMember" type="submit" value="1" name="btnSubmit">Add Work Schedule</button>
+                    <button id="addMember" type="submit" value="<?=$_POST["btnSubmit"]?>" name="btnSubmit">Add Work Schedule</button>
                     <br>
                     <br>
                 </div>

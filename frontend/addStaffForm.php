@@ -1,4 +1,6 @@
 <?php
+
+session_start();
 $todayDate = date("Y-m-d");
 
 if(!isset($_SESSION["user"])){

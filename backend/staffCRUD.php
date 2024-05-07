@@ -40,7 +40,7 @@ function queryStaffs(){
 }
 
 // SEARCH STAFF BY ID OR NAME (FIRST OR LAST)
-function searchMembers($param){
+function searchStaff($param){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -49,7 +49,7 @@ function searchMembers($param){
         "https://egzfkwqwoobkavbxoxry.supabase.co"
     );
 
-    $db = $service->initializeDatabase('member', 'member_id'); //argument is (tablename, column name of PK)
+    $db = $service->initializeDatabase('staff', 'staff_id'); //argument is (tablename, column name of PK)
 
     $listMember = array();
     $listMember2 = array();
@@ -57,11 +57,11 @@ function searchMembers($param){
     if(is_numeric($param)){
         if(intval($param) > 0){
             $query = [
-                'select' => 'member_id,member_first_name,member_last_name,member_dob,member_address',
-                'from'   => 'member',
+                'select' => 'staff_id,staff_first_name,staff_last_name',
+                'from'   => 'staff',
                 'where' => 
                 [
-                    'member_id' => 'eq.' . intval($param)
+                    'staff_id' => 'eq.' . intval($param)
                 ]
             ];
             
@@ -75,11 +75,11 @@ function searchMembers($param){
     } 
     else {
         $query = [
-            'select' => 'member_id,member_first_name,member_last_name,member_dob,member_address',
-            'from'   => 'member',
+            'select' => 'staff_id,staff_first_name,staff_last_name',
+            'from'   => 'staff',
             'where' => 
             [
-                'member_first_name' => 'ilike.%' . strval($param) . '%'
+                'staff_first_name' => 'ilike.%' . strval($param) . '%'
             ]
         ];
         
@@ -91,11 +91,11 @@ function searchMembers($param){
         }
     
         $query = [
-            'select' => 'member_id,member_first_name,member_last_name,member_dob,member_address',
-            'from'   => 'member',
+            'select' => 'staff_id,staff_first_name,staff_last_name',
+            'from'   => 'staff',
             'where' => 
             [
-                'member_last_name' => 'ilike.%' . strval($param) . '%'
+                'staff_last_name' => 'ilike.%' . strval($param) . '%'
             ]
         ];
         

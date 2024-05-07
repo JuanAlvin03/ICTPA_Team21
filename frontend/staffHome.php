@@ -40,7 +40,7 @@ html, body, h1, h2, h3, h4, h5{font-family: "Open Sans", sans-serif}
   <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>ACMS</a>
   <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
   <a href="addStaffForm.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Add New Staff</a>
-  <a href="addWorkScheduleForm.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Schedule a Shift</a>
+  <a href="preAddWorkScheduleForm.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Schedule a Shift</a>
   <div class="w3-dropdown-hover w3-hide-small">
     <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
     <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
@@ -165,7 +165,7 @@ html, body, h1, h2, h3, h4, h5{font-family: "Open Sans", sans-serif}
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-              <p><h4>Welcome <?=$_SESSION["staff"]->staff_first_name?></h4></p>
+              <p><h4 class="w3-center">Welcome <?=$_SESSION["staff"]->staff_first_name?></h4></p>
             </div>
           </div>
         </div>

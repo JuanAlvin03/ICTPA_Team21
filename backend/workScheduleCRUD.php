@@ -90,7 +90,7 @@ function createWork($input){
         //ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
         'start' => $input["dateStart"] . " " . $input["timeStart"] . ":00",
         'end' => $input["dateEnd"] . " " . $input["timeEnd"] . ":00",
-        'staff_id' => $input["btnSubmit"],
+        'staff_id' => $input["btnSubmit"]
     ];
     
     try{
