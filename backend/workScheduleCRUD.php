@@ -74,6 +74,68 @@ function queryOneWork($id){
     }
 }
 
+// GET WORK SCHEDULE OF A STAFF (BASED ON ONE STAFF ID)
+function queryStaffWork($staffID){
+
+    $service = new PHPSupabase\Service(
+        // PROJECT API KEY
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnemZrd3F3b29ia2F2YnhveHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5Nzc1MTcsImV4cCI6MjAyNjU1MzUxN30.0EG7AWB6TsRMqTssMS9bhf0plepaG1EPpMiX1jW8aUE", 
+        // PROJECT URL
+        "https://egzfkwqwoobkavbxoxry.supabase.co"
+    );
+
+    $db = $service->initializeDatabase('work_schedule', 'work_schedule_id'); //param(tablename, column name of PK)
+    
+    $query = [
+        'select' => '*',
+        'from'   => 'work_schedule',
+        'where' => 
+        [
+            'staff_id' => 'eq.' . intval($staffID)
+        ]
+    ];
+    
+    try{
+        $member = $db->createCustomQuery($query)->getResult();
+        return $member;
+    }
+    catch(Exception $e){
+        //echo $e->getMessage();
+        return $e->getMessage();
+    }
+}
+
+// GET NEXT WORK SCHEDULE OF A STAFF (BASED ON ONE STAFF ID) (DATETIME >= TODAY NOW) (SORT BY DATE)(RETURN FORST ONE)
+function queryUpcomingStaffWork($staffID){
+
+    $service = new PHPSupabase\Service(
+        // PROJECT API KEY
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnemZrd3F3b29ia2F2YnhveHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5Nzc1MTcsImV4cCI6MjAyNjU1MzUxN30.0EG7AWB6TsRMqTssMS9bhf0plepaG1EPpMiX1jW8aUE", 
+        // PROJECT URL
+        "https://egzfkwqwoobkavbxoxry.supabase.co"
+    );
+
+    $db = $service->initializeDatabase('work_schedule', 'work_schedule_id'); //param(tablename, column name of PK)
+    
+    $query = [
+        'select' => '*',
+        'from'   => 'work_schedule',
+        'where' => 
+        [
+            'staff_id' => 'eq.' . intval($staffID)
+        ]
+    ];
+    
+    try{
+        $member = $db->createCustomQuery($query)->getResult();
+        return $member;
+    }
+    catch(Exception $e){
+        //echo $e->getMessage();
+        return $e->getMessage();
+    }
+}
+
 // INSERT WORK SCHEDULE
 function createWork($input){
 

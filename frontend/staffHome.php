@@ -2,7 +2,9 @@
 session_start();
 
 require_once "../backend/staffAvailabilityCRUD.php";
+require_once "../backend/workScheduleCRUD.php";
 
+// CHECK LOGIN INFO
 if(!isset($_SESSION["user"])){
     header("Location: login.php");
     exit;
@@ -13,7 +15,17 @@ if(!isset($_SESSION["staff"])){
     exit;
 }
 
+// GET AVAILABILITY TO DISPLAY
 $ava = queryOneAvailability($_SESSION["staff"]->staff_id)[0];
+
+// GET WORK SCHEDULES
+$data = array();
+
+if(isset($_GET["searchMember"])){
+    if($_GET["searchMember"] != ""){
+        $data = searchMembers($_GET["searchMember"]);
+    }
+}
 
 ?>
 
@@ -84,7 +96,6 @@ html, body, h1, h2, h3, h4, h5{font-family: "Open Sans", sans-serif}
               <button type="submit" name="btn" value="<?=$_SESSION["staff"]->staff_id?>" class="w3-button w3-block w3-theme-l4">View Profile</button>
             </form>
           </p>
-         
         </div>
       </div>
       <br>

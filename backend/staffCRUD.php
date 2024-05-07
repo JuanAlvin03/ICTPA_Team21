@@ -55,7 +55,7 @@ function searchStaff($param){
     $listMember2 = array();
 
     if(is_numeric($param)){
-        if(intval($param) > 0){
+        if(intval($param) >= 0){
             $query = [
                 'select' => 'staff_id,staff_first_name,staff_last_name',
                 'from'   => 'staff',
