@@ -42,6 +42,37 @@ function queryScheduledService(){
     }
 }
 
+// GET TODAYS SERVICE
+function queryTodayService(){
+
+    $service = new PHPSupabase\Service(
+        // PROJECT API KEY
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnemZrd3F3b29ia2F2YnhveHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5Nzc1MTcsImV4cCI6MjAyNjU1MzUxN30.0EG7AWB6TsRMqTssMS9bhf0plepaG1EPpMiX1jW8aUE", 
+        // PROJECT URL
+        "https://egzfkwqwoobkavbxoxry.supabase.co"
+    );
+
+    $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
+    
+    $query = [
+        'select' => '*',
+        'from'   => 'scheduled_service',
+        'where' => 
+        [
+            'service_start_date_time' => 'gt.' . date("Y-m-d")
+        ],
+        'order' => 'service_start_date_time.asc',
+    ];
+    
+    try{
+        $listMember = $db->createCustomQuery($query)->getResult();
+        return $listMember;
+    }
+    catch(Exception $e){
+        return $e->getMessage();
+    }
+}
+
 // GET ONE SCHEDULED SERVICE
 function queryOneScheduledService(){
 

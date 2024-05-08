@@ -1,6 +1,5 @@
 <?php 
 session_start();
-include_once "../backend/scheduledServiceCRUD.php";
 
 if(!isset($_SESSION["user"])){
   header("Location: login.php");
@@ -189,6 +188,48 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         </div>
 
       </div>
+      
+      <div class="w3-container w3-card w3-white w3-round w3-margin">
+        <!-- <img src="/w3images/avatar5.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px"> -->
+        <span class="w3-right w3-opacity">13/04/2024 9am</span>
+        <h4>Jane Doe: MemberID: MID019</h4>
+        <!-- <hr class="w3-clear"> -->
+<!--        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
+        <p></p>
+        <p>Address: 7 Finder Avenue, Malvern VIC 3162 </p>
+        <p>Visitation Preparation Checklist: 
+
+            <ol>
+                <li>Preparation of Meals</li>
+                <li>Preparation of Medication</li>
+                <li>Preparation of Cleaning Materials</li>
+             </ol>
+
+             <p><a href="">Member Visitation Profile: Jane Doe 13/04/2024 @ 9am</a></p>
+
+        </p>
+      </div>  
+
+      <div class="w3-container w3-card w3-white w3-round w3-margin">
+        <!-- <img src="/w3images/avatar6.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px"> -->
+        <span class="w3-right w3-opacity">14/04/2024 9:30am</span>
+        <h4>Ahn Do: MemberID: MID10026</h4>
+        <!-- <hr class="w3-clear"> -->
+<!--        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
+        <p></p>
+        <p>Address: 10 States Drive, Sandringham VIC 3122 </p>
+        <p>Visitation Preparation Checklist: 
+
+            <ol>
+                <li>Preparation of Meals</li>
+                <li>Preparation of Medication</li>
+                <li>Preparation of Cleaning Materials</li>
+             </ol>
+
+             <p><a href="">Member Visitation Profile: Ahn Do 14/04/2024 @ 9:30am</a></p>
+
+        </p>
+      </div> 
       
     <!-- End Middle Column -->
     </div>

@@ -187,7 +187,7 @@ function createMember($input){
         'member_address' => $input["memberAddress"],
         'allergy' => $allergy,
         'sickness' => $medicalCondition,
-        // 'additional_notes' => $input["memberAddInfo"] //  additional notes, in json?
+        'additional_notes' => $input["memberAddInfo"] //  additional notes, just use text mate
     ];
     
     try{
