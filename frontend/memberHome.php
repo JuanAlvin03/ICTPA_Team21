@@ -4,12 +4,12 @@ session_start();
 //cek login info, if no info -> redirect to login
 
 if(!isset($_SESSION["user"])){
-  header("Location: ../frontend/login.php");
+  header("Location: login.php");
   exit;
 }
 
 if(!isset($_SESSION["staff"])){
-  header("Location: ../frontend/login.php");
+  header("Location: login.php");
   exit;
 }
 

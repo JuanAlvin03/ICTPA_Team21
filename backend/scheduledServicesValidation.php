@@ -5,7 +5,7 @@ require_once "scheduledServiceCRUD.php";
 // ADD
 if
 (isset($_POST["btnSubmit"])
-            && isset($_POST["serviceLoc"])
+            && isset($_POST["serviceID"])
             && isset($_POST["address"])
             && isset($_POST["date"])
             && isset($_POST["time"])

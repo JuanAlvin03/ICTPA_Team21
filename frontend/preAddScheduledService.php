@@ -1,19 +1,12 @@
 <?php
+session_start();
 include_once "../backend/memberCRUD.php";
 
 $data = array();
 
-$id = "";
-$first = "";
-$last = "";
-
-if(isset($_POST["searchMember"])){
-    if($_POST["searchMember"] != ""){
-        $data = searchMembers($_POST["searchMember"]);
-        $d = $data[0];
-        $id = $d->member_id;
-        $first = $d->member_first_name;
-        $last = $d->member_last_name;
+if(isset($_GET["searchMember"])){
+    if($_GET["searchMember"] != ""){
+        $data = searchMembers($_GET["searchMember"]);
     }
 }
 
@@ -38,7 +31,7 @@ if(isset($_POST["searchMember"])){
             <br>
             <h1 id="mainHeader">Schedule a Service</h1>
 
-            <form action="" method="post">
+            <form action="" method="get">
                 <div class="nice-form-group">
                     <br>
                     <input type="search" placeholder="Search for Member" value="" style="--nf-input-size: 0.85rem" name="searchMember">
@@ -52,49 +45,46 @@ if(isset($_POST["searchMember"])){
                 </div>
             </form>
 
-            <?
+            <!-- Searched Staffs -->
 
+            <?php
+                if((count($data) == 0) && isset($_GET["searchMember"])): 
             ?>
+
+            <div class="nice-form-group">
+              <h4>No such Member</h4>
+            </div>  
+
+            <?php endif;
+              if(!isset($_GET["searchMember"])) : 
+            ?>
+
+            <div class="nice-form-group">
+              <h4>Search a Member!</h4>
+            </div>  
+
+            <?php endif;
+                  foreach ($data as $d) :
+            ?>
+              <div class="nice-form-group">
+                <p>
+                  <form action="addScheduledService.php" method="POST">
+                    <?= $d->member_id ?> - <?= $d->member_first_name ?> <?= $d->member_last_name ?>
+                    <button type="submit" value="<?= $d->member_id ?>" name="btnNext">Select</button>
+                  </form>
+                </p>
+              </div>  
+
+            <?php endforeach; ?>   
+
+            <!-- Back Button -->
+            <br>
+            <div id="addMemberButton">
+              <form action="memberHome.php">
+                <button type="submit">Back</button>
+              </form>
+            </div>
             
-            <!-- Go to next form -->
-            <form action="addScheduledService.php" method="post">
-                <div class="nice-form-group">
-                    <label>Member ID:</label>
-                    <input type="text" disabled placeholder="" value="<?=$id?>" style="--nf-input-size: 0.5rem"/>
-                  </div><!-- setup up the MemberID from AWD Assignment -->
-
-                <div class="nice-form-group">
-                    <label>Member First Name:</label>
-                    <input type="text" disabled placeholder="First Name" value="<?=$first?>" style="--nf-input-size: 0.5rem"/>
-                </div>
-
-
-                <div class="nice-form-group">
-                    <label>Member Last Name:</label>
-                    <input type="text" disabled placeholder="Last Name" value="<?=$last?>" style="--nf-input-size: 0.5rem"/>
-                </div>
-
-                <!-- Service Location -->
-                <fieldset class="nice-form-group">
-                    <legend>Service Type</legend>
-                    <div class="nice-form-group">
-                      <input type="radio" name="serviceLoc" id="Male" value="1" checked>
-                      <label for="Male">In-Home</label>
-                    </div>
-
-                    <div class="nice-form-group">
-                      <input type="radio" name="serviceLoc" id="Female" value="2">
-                      <label for="Female">Residential</label>
-                    </div>
-                </fieldset>
-
-                <div id="addMemberButton">
-                    <br>
-                  <button id="btnAddMember" type="submit" name="btnNext" value="<?=$id?>">Next</button>
-                  <br>
-                  <br>
-                </div>
-            </form>
         </div>
 
 

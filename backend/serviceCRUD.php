@@ -26,18 +26,16 @@ function queryService(){
     $db = $service->initializeDatabase('service', 'service_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'service_id,service_type,service_cost',
+        'select' => '*',
         'from'   => 'service'
     ];
     
     try{
         $listService = $db->createCustomQuery($query)->getResult();
-        foreach ($listService as $service){
-            echo $service->service_id . ' - ' . $service->service_type . ' - ' . $service->service_cost . '<br />';
-        }
+        return $listService;
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        return  $e->getMessage();
     }
 }
 

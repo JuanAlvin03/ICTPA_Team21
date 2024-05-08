@@ -19,13 +19,7 @@ if(!isset($_SESSION["staff"])){
 $ava = queryOneAvailability($_SESSION["staff"]->staff_id)[0];
 
 // GET WORK SCHEDULES
-$data = array();
-
-if(isset($_GET["searchMember"])){
-    if($_GET["searchMember"] != ""){
-        $data = searchMembers($_GET["searchMember"]);
-    }
-}
+$schedule = queryUpcomingStaffWork($_SESSION["staff"]->staff_id)[0];
 
 ?>
 
@@ -155,11 +149,8 @@ html, body, h1, h2, h3, h4, h5{font-family: "Open Sans", sans-serif}
         <div class="w3-container">
           <p>Member Directory Shortcuts</p>
           <p>
-            <span class="w3-tag w3-small w3-theme-d5">Elderly Care Plans</span>
-            <span class="w3-tag w3-small w3-theme-d4">Member Records</span>
-            <span class="w3-tag w3-small w3-theme-d3">Personal Details</span>
+            <span class="w3-tag w3-small w3-theme"><a href="memberHome.php" class="w3-hover-white">Member Management</a></span>
             <span class="w3-tag w3-small w3-theme-d2">Medication Requirements</span>
-            <span class="w3-tag w3-small w3-theme-d1">Relevant Information</span>
             <span class="w3-tag w3-small w3-theme">Add Member</span>
           </p>
         </div>
@@ -186,9 +177,8 @@ html, body, h1, h2, h3, h4, h5{font-family: "Open Sans", sans-serif}
       <div class="w3-container w3-card w3-white w3-round w3-margin">
         <span class="w3-right w3-opacity">Todays Date</span>
         <h4>Upcoming Work Schedule</h4>
-        <h6>date of Next Work Schedule</h6>
-        <p>Start Time: </p>
-        <p>Finish Time: </p>
+        <h6>Shift Start: <?=substr($schedule->start, 0, 10)?> <?=substr($schedule->start, 11, 8)?></h6>
+        <h6>Shift End  : <?=substr($schedule->end, 0, 10)?> <?=substr($schedule->end, 11, 8)?></h6>
         
         <p><button class="w3-button w3-block w3-theme-l4">Check-In</button></p>
       </div>
@@ -255,7 +245,7 @@ html, body, h1, h2, h3, h4, h5{font-family: "Open Sans", sans-serif}
     <div class="w3-col m2">
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
-          <p>Thursday 2nd May 2024 8:45am</p>
+          <p>Friday 10th May 2024</p>
 
         </div>
       </div>

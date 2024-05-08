@@ -1,14 +1,10 @@
 <?php
 
 include_once "../backend/memberCRUD.php";
+include_once "../backend/serviceCRUD.php";
+
 $todayDate = date("Y-m-d");
 $data = array();
-
-$id = "";
-$first = "";
-$last = "";
-$type = "";
-$address = "";
 
 if(isset($_POST["btnNext"])){
     if($_POST["btnNext"] != ""){
@@ -17,14 +13,14 @@ if(isset($_POST["btnNext"])){
         $id = $d->member_id;
         $first = $d->member_first_name;
         $last = $d->member_last_name;
-        $type = $_POST["serviceLoc"];
         $address = $d->member_address;
     }
+} else {
+    header("Location: preAddScheduledService.php");
+    exit;
 }
 
-$check = array("checked", "");
-
-if($type == 2){$address="-"; $check = array("", "checked");};
+$listService = queryService();
 
 ?>
 
@@ -63,102 +59,107 @@ if($type == 2){$address="-"; $check = array("", "checked");};
                 <input type="text" disabled placeholder="Last Name" value="<?=$last?>" style="--nf-input-size: 0.5rem"/>
             </div>
 
-            <!--
-            <div class="nice-form-group">
-                <label>Service Type:</label>
-                <input type="text" disabled placeholder="Last Name" value="" style="--nf-input-size: 0.5rem"/>
-            </div>-->
-
             <br>
 
             <br>
-<!-- ../backend/scheduledServicesValidation.php -->
+
             <form action="../backend/scheduledServicesValidation.php" method="post">
-            <label>Please select service options:</label>  
-            <fieldset class="nice-form-group">
+
+                <label>Please select service option:</label>  
+
+                <fieldset class="nice-form-group">
+
+                <?php 
+                  foreach ($listService as $d) :
+                ?>
+                  <div class="nice-form-group">
+                    <input type="radio" name="serviceID" value="<?=$d->service_id?>" checked>
+                    <label><?=$d->service_type?></label>
+                  </div>  
+
+                <?php endforeach; ?>   
+
+                </fieldset>
+                <!--
+<fieldset class="nice-form-group">
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="1" checked>
+                      <label for="male">Personal Care Services</label>
+                    </div>
+
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="2">
+                      <label for="female">Healthcare Service</label>
+                    </div>
+
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="3">
+                      <label for="other">Nutritional Service</label>
+                    </div>
+
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="4">
+                      <label for="other">Therapeutic Service</label>
+                    </div>
+
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="5">
+                      <label for="other">Emotional and Psychological Support</label>
+                    </div>
+
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="6">
+                      <label for="other">Safety and Security Services</label>
+                    </div>
+
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="7">
+                      <label for="other">Transportation Services</label>
+                    </div>
+
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="9">
+                      <label for="other">Housekeeping and Laundry Services</label>
+                    </div>
+
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="10">
+                      <label for="other">Cultural and Spiritual support</label>
+                    </div>
+
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="11">
+                      <label for="other">Family Support Service</label>
+                    </div>
+
+                    <div class="nice-form-group">
+                      <input type="radio" name="serviceID" value="12">
+                      <label for="other">End-of-Life Care Services</label>
+                    </div>
+
+                </fieldset>-->
+
+                <br>
+
                 <div class="nice-form-group">
-                    <input type="checkbox" id="check-1" />
-                    <label for="check-1" style="border:0px">Personal Care</label>
-            </div>
-
-            <div class="nice-form-group">
-                <input type="checkbox" id="check-2" />
-                <label for="check-2" style="border:0px">Companion Care</label>
-            </div>
-
-            <div class="nice-form-group">
-                <input type="checkbox" id="check-3" />
-                <label for="check-3" style="border:0px">Meal Preparation</label>
-            </div>
-
-            <div class="nice-form-group">
-                <input type="checkbox" id="check-4" />
-                <label for="check-4" style="border:0px">Medication Management</label>
-            </div>
-
-            <div class="nice-form-group">
-                <input type="checkbox" id="check-5" />
-                <label for="check-5" style="border:0px">Housekeeping</label>
-            </div>
-
-            <div class="nice-form-group">
-                <input type="checkbox" id="check-6" />
-                <label for="check-6" style="border:0px">Transportation</label>
-            </div>
-
-            <div class="nice-form-group">
-                <input type="checkbox" id="check-7" />
-                <label for="check-7" style="border:0px">Mobility Assistance</label>
-            </div>
-
-            <div class="nice-form-group">
-                <input type="checkbox" id="check-8" />
-                <label for="check-8" style="border:0px">Medical Care</label>
-            </div>
-
-            <div class="nice-form-group">
-                <input type="checkbox" id="check-9" />
-                <label for="check-9" style="border:0px">Cognitive Stimulation</label>
-            </div>
-
-            </fieldset>
-
-            <br>
-
-            <!-- Service Location -->
-            <fieldset class="nice-form-group">
-                <legend>Service Type</legend>
-                <div class="nice-form-group">
-                  <input type="radio" name="serviceLoc" value="1" <?=$check[0]?>>
-                  <label for="in-home">In-Home</label>
+                    <label>Service Address:</label>
+                    <input type="text" placeholder="service address" value="<?=$address?>" style="--nf-input-size: 0.5rem" name="address">
                 </div>
 
                 <div class="nice-form-group">
-                  <input type="radio" name="serviceLoc" value="2" <?=$check[1]?>>
-                  <label for="residential">Residential</label>
+                    <label>Date</label>
+                    <input type="date" value="<?=$todayDate?>" min="<?=$todayDate?>" style="--nf-input-size: 0.5rem" name="date">
                 </div>
-            </fieldset>
 
-            <div class="nice-form-group">
-                <label>Service Address:</label>
-                <input type="text" placeholder="Last Name" value="<?=$address?>" style="--nf-input-size: 0.5rem" name="address">
-            </div>
+                <div class="nice-form-group">
+                    <label>Time</label>
+                    <input type="time" value="00:00" style="--nf-input-size: 0.5rem" name="time">
+                </div>
 
-            <div class="nice-form-group">
-                <label>Date</label>
-                <input type="date" value="<?=$todayDate?>" min="<?=$todayDate?>" style="--nf-input-size: 0.5rem" name="date">
-            </div>
-            
-            <div class="nice-form-group">
-                <label>Time</label>
-                <input type="time" value="00:00" style="--nf-input-size: 0.5rem" name="time">
-            </div>
-
-            
-            <div class="nice-form-group">
-                <label>Additional Information: </label>
-                <textarea rows="5" value=""></textarea>
-            </div>
+                <div class="nice-form-group">
+                    <label>Additional Information: </label>
+                    <textarea rows="5" value=""></textarea>
+                </div>
 
             <br>
               <div id="addServiceButton">
@@ -166,6 +167,14 @@ if($type == 2){$address="-"; $check = array("", "checked");};
                 <br>
               </div>
             </form>
+
+            <!-- Back Button -->
+            <div id="addMemberButton">
+            <br>
+              <form action="preAddScheduledService.php">
+                <button type="submit">Back</button>
+              </form>
+            </div>
 
            <br>
         </div>

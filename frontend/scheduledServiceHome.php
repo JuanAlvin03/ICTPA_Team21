@@ -2,12 +2,12 @@
 session_start();
 
 if(!isset($_SESSION["user"])){
-  header("Location: ../frontend/login.php");
+  header("Location: login.php");
   exit;
 }
 
 if(!isset($_SESSION["staff"])){
-  header("Location: ../frontend/login.php");
+  header("Location: login.php");
   exit;
 }
 
@@ -69,12 +69,17 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
          <br>
-         <h4 class="w3-center">Carer Profile #1</h4>
+         <h4 class="w3-center"><?=$_SESSION["staff"]->staff_first_name . ' ' .$_SESSION["staff"]->staff_last_name?></h4>
          <p class="w3-center"><img src="head.jpg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>Member Services</p>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i>In-Home Care</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>April 1, 1988</p> <br>
+         <pre>Staff ID      : <?=$_SESSION["staff"]->staff_id?></pre>
+         <pre>Position      : <?=$_SESSION["staff"]->position?></pre>
+         <pre>Phone Number  : <?=$_SESSION["staff"]->staff_phone_number?></pre>
+          <p>
+            <form action="detailStaffForm.php" method="post">
+              <button type="submit" name="btn" value="<?=$_SESSION["staff"]->staff_id?>" class="w3-button w3-block w3-theme-l4">View Profile</button>
+            </form>
+          </p>
         </div>
       </div>
       <br>
@@ -133,15 +138,6 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
         </div>
       </div>
       <br>
-      
-      <!-- Alert Box -->
-      <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
-        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
-          <i class="fa fa-remove"></i>
-        </span>
-        <p><strong>Hey!</strong></p>
-        <p>People are looking at your profile. Find out who.</p>
-      </div>
     
     <!-- End Left Column -->
     </div>

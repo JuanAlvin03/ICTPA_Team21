@@ -105,7 +105,7 @@ function queryStaffWork($staffID){
     }
 }
 
-// GET NEXT WORK SCHEDULE OF A STAFF (BASED ON ONE STAFF ID) (DATETIME >= TODAY NOW) (SORT BY DATE)(RETURN FORST ONE)
+// GET NEXT WORK SCHEDULE OF A STAFF (BASED ON ONE STAFF ID)
 function queryUpcomingStaffWork($staffID){
 
     $service = new PHPSupabase\Service(
@@ -122,8 +122,10 @@ function queryUpcomingStaffWork($staffID){
         'from'   => 'work_schedule',
         'where' => 
         [
-            'staff_id' => 'eq.' . intval($staffID)
-        ]
+            'staff_id' => 'eq.' . intval($staffID),
+            'start' => 'gt.' . date("Y-m-d") . ' '. date("H:i:s")
+        ],
+        'order' => 'start.asc',
     ];
     
     try{

@@ -90,7 +90,7 @@ function createScheduledService($input){
         // MEMBER ID IS AUTO INCREMENT, DO NOT INPUT MANUALLY
         'service_start_date_time' => $input["date"] . " " . $input["time"] . ":00",
         'service_location_address' => $input["address"],
-        'service_id' => $input["serviceLoc"],  // date must be checked (less than today)
+        'service_id' => $input["serviceID"],
         'member_id' => $input["btnSubmit"],
     ];
     
