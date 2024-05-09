@@ -14,6 +14,11 @@ if(!isset($_SESSION["staff"])){
   exit;
 }
 
+if(!$_SESSION["user"]->is_manager && !$_SESSION["user"]->is_admin){
+  header("Location: staffHome.php");
+  exit;
+}
+
 if(!isset($_POST["btnSubmit"])){
   header("Location: preAddWorkScheduleForm.php");
   exit;

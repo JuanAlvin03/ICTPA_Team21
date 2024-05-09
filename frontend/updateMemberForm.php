@@ -236,23 +236,8 @@
                 <!-- ADDITIONAL INFORMATION -->
                 <div class="nice-form-group">
                     <label>Additional Information</label>
-                    <!-- set value to additional notes -->
-                    <textarea rows="5" value="<?= $d->additional_notes ?>" id="memberAddInfo" name="memberAddInfo"></textarea>
+                    <input type="text" placeholder="" value="<?= $d->additional_notes ?>" style="--nf-input-size: 0.5rem" id="memberAddInfo" name="memberAddInfo">
                 </div>
-
-                <!--
-                <fieldset class="nice-form-group">
-                    <label>Member Status</label>
-                    <div class="nice-form-group">
-                      <input type="radio" name="radio" id="r-1" />
-                      <label for="r-1">Active</label>
-                    </div>
-                    <div class="nice-form-group">
-                        <input type="radio" name="radio" id="r-2" />
-                        <label for="r-2">Disabled</label>
-                      </div>              
-                  </fieldset>
-                -->
 
                 <br>
 

@@ -12,6 +12,16 @@ if(!isset($_SESSION["staff"])){
   exit;
 }
 
+$data = array();
+
+$data = queryScheduledService();
+
+if(isset($_GET["searchMember"])){
+    if($_GET["searchMember"] != ""){
+        $data = searchMembers($_GET["searchMember"]);
+    }
+}
+
 ?>
 
 <html>
@@ -34,8 +44,9 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
   <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
   <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Aged Care</a>
-  <a href="memberHome.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"><i class="fa fa-user w3-margin-right"></i>Member Management</a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
+  <a href="memberHome.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"></i>Member Management</a>
+  <a href="staffHome.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Staff Home Page</a>
+  <a href="preAddScheduledService.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Schedule a Service</a>
   <div class="w3-dropdown-hover w3-hide-small">
     <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
     <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
@@ -44,7 +55,6 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       <a href="#" class="w3-bar-item w3-button">Sausage Sizzle for facility members and their family and friends this Friday 12/04/2023 at 1pm. </a>
     </div>
   </div>
-  <a href="preAddScheduledService.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Schedule a Service</a>
   <!--Log out must redirect to logout page to actually logout and stuff and then redirect to login page -->
   <a href="../backend/logout.php" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">
     Logout
@@ -147,6 +157,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     <!-- Middle Column -->
     <div class="w3-col m7">
     
+      <!--
       <div class="w3-row-padding">
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
@@ -159,37 +170,51 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           </div>
         </div>
       </div>
-      
-      <div class="w3-container w3-card w3-white w3-round w3-margin">
-        <!-- <img src="/w3images/avatar2.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px"> -->
-        <span class="w3-right w3-opacity">12/04/2024 10am</span>
-        <h4>John Doe: MemberID: MID007</h4>
-        <!-- <hr class="w3-clear"> -->
-<!--        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>-->
-        <p></p>
-        <p>Address: 13 Open Road, Caulfield VIC 3162 </p>
-        <p>Visitation Preparation Checklist: 
+      -->
 
+      <!--
+      <?php
+        //if((count($data) == 0) && isset($_GET["searchMember"])): 
+      ?>
+      
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <h4>No such member</h4>
+      </div>  
+            
+      <?php //endif;
+        //if(!isset($_GET["searchMember"])) : 
+      ?>
+
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        <h4>Search a member!</h4>
+      </div>  -->
+
+      <?php //endif;
+            foreach ($data as $d) :
+      ?>
+
+        <div class="w3-container w3-card w3-white w3-round w3-margin">
+          <h4>Member ID: <?=$d->member_id?> - <?=$d->member->member_first_name?> <?=$d->member->member_last_name?></h4>
+          <h5><?=$d->service->service_type?></h5>
+          <p>Address: <?=$d->service_location_address?></p>
+          <p>Date: <?=substr($d->service_start_date_time, 0, 10)?></p>
+          <p>Time: <?=substr($d->service_start_date_time, 11, 8)?></p>
+          <p>Note: <?=$d->notes?></p>
+          <p>Service Preparation Checklist: 
             <ol>
-                <li>Preparation of Meals</li>
-                <li>Preparation of Medication</li>
-                <li>Preparation of Cleaning Materials</li>
-             </ol>
-
-             <p><a href="">Member Visitation Profile: John Doe 12/04/2024 @ 10am</a></p>
-
-        </p>
-        <div class="w3-row-padding" style="margin:0 -16px">
-            <div class="w3-half">
-             <!-- <img src="/w3images/lights.jpg" style="width:100%" alt="Northern Lights" class="w3-margin-bottom"> -->
-            </div>
-            <div class="w3-half">
-            <!--   <img src="/w3images/nature.jpg" style="width:100%" alt="Nature" class="w3-margin-bottom"> -->
-          </div>
+              <li>Preparation of Meals</li>
+              <li>Preparation of Medication</li>
+              <li>Preparation of Cleaning Materials</li>
+            </ol>
+          </p>
+          <p><a href="">Member Service Profile: John Doe 12/04/2024 @ 10am</a></p>
+          <p>
+            <form action="detailMemberForm.php" method="POST">
+              <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnDetail">Member Profile</button>
+            </form>
+          </p>
         </div>
-
-      </div>
-      
+      <?php endforeach; ?>
     <!-- End Middle Column -->
     </div>
     

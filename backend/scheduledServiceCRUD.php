@@ -1,19 +1,6 @@
 <?php
 require "vendor/autoload.php";
 
-/*
-
-NEEDED FUNCTIONS:
-
-- Query Scheduled Services (in a day?? week? for a particular member?)
-- Get One Scheduled service 
-- Create
-- Update 
-- Delete (we dont have status attr yet, or hard delete)
-
-*/
-
-
 // GET SCHEDULED SERVICE
 function queryScheduledService(){
 
@@ -27,18 +14,27 @@ function queryScheduledService(){
     $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'member_id,member_first_name,member_last_name',
-        'from'   => 'member'
+        'select' => '*',
+        'from'   => 'scheduled_service',
+        'join' => 
+        [
+            [
+                'table' => 'member',
+                'tablekey' => 'member_id'
+            ],
+            [
+                'table' => 'service',
+                'tablekey' => 'service_id'
+            ]
+        ]
     ];
     
     try{
         $listMember = $db->createCustomQuery($query)->getResult();
-        foreach ($listMember as $member){
-            echo $member->member_id . ' - ' . $member->member_first_name . ' ' . $member->member_last_name . '<br />';
-        }
+        return $listMember;
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        return $e->getMessage();
     }
 }
 
@@ -57,6 +53,17 @@ function queryTodayService(){
     $query = [
         'select' => '*',
         'from'   => 'scheduled_service',
+        'join' => 
+        [
+            [
+                'table' => 'member',
+                'tablekey' => 'member_id'
+            ],
+            [
+                'table' => 'service',
+                'tablekey' => 'service_id'
+            ]
+        ],
         'where' => 
         [
             'service_start_date_time' => 'gt.' . date("Y-m-d")
@@ -74,7 +81,7 @@ function queryTodayService(){
 }
 
 // GET ONE SCHEDULED SERVICE
-function queryOneScheduledService(){
+function queryOneScheduledService($id){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY
@@ -86,8 +93,8 @@ function queryOneScheduledService(){
     $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
     
     $query = [
-        'select' => 'member_id,member_first_name,member_last_name',
-        'from'   => 'member',
+        'select' => '*',
+        'from'   => 'scheduled_service',
         'where' => 
         [
             'member_id' => 'eq.1'
@@ -96,12 +103,10 @@ function queryOneScheduledService(){
     
     try{
         $listMember = $db->createCustomQuery($query)->getResult();
-        foreach ($listMember as $member){
-            echo $member->member_id . ' - ' . $member->member_first_name . ' ' . $member->member_last_name . '<br />';
-        }
+        return $listMember;
     }
     catch(Exception $e){
-        echo $e->getMessage();
+        return $e->getMessage();
     }
 }
 
@@ -146,7 +151,7 @@ function createScheduledService($input){
 }
 
 // UPDATE SCHEDULED SERVICE
-function updateScheduledService(/*$id*/){
+function updateScheduledService($id){
 
     $service = new PHPSupabase\Service(
         // PROJECT API KEY

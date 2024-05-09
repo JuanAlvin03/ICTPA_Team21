@@ -12,6 +12,11 @@ if(!isset($_SESSION["staff"])){
     exit;
 }
 
+if(!$_SESSION["user"]->is_manager && !$_SESSION["user"]->is_admin){
+  header("Location: staffHome.php");
+  exit;
+}
+
 $todayDate = date("Y-m-d");
 
 $data = array();

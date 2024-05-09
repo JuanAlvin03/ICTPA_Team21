@@ -157,7 +157,7 @@
                 <!-- ADDITIONAL INFORMATION -->
                 <div class="nice-form-group">
                     <label>Additional Information</label>
-                    <textarea rows="5" value="" id="memberAddInfo" name="memberAddInfo"></textarea>
+                    <input type="text" placeholder="" value="" style="--nf-input-size: 0.5rem" id="memberAddInfo" name="memberAddInfo">
                 </div>
 
                 <!--

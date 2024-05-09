@@ -171,7 +171,7 @@ function createStaff($input){
         'staff_email' => $input["email"],
         'position' => $input["position"],
         'staff_employment_type' => $input["employmentType"],
-        'manager_id' => $input["managerID"], // must be int
+        //'manager_id' => $input["managerID"], // must be int
     ];
     
     try{

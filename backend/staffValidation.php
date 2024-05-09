@@ -21,6 +21,7 @@ if
     
     $_SESSION["newStaffID"] = $res[0]->staff_id;
 
+    echo "<script>alert('hello')</script>";
     header("Location: ../frontend/addStaffAvailabilityForm.php");
     exit;
 
