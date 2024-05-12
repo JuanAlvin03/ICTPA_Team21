@@ -1,5 +1,5 @@
 <?php
-include_once "../backend/memberCRUD.php";
+include_once "../backend/staffCRUD.php";
 session_start();
 //cek login info, if no info -> redirect to login
 
@@ -13,20 +13,21 @@ if(!isset($_SESSION["staff"])){
   exit;
 }
 
-$data = array();
+$data = getCarer();
 
+/*
 if(isset($_GET["searchMember"])){
     if($_GET["searchMember"] != ""){
         $data = searchMembers($_GET["searchMember"]);
     }
 }
-
+*/
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Member Management</title>
+<title>Carer List</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -47,7 +48,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
   <a href="scheduledServiceHome.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Scheduled Services</a>
   <a href="staffHome.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Staff Home Page</a>
   <a href="preAddScheduledService.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Schedule a Service</a>
-  <a href="carerList.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Carers List</a>
+  <a href="memberHome.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"></i>Member Management</a>
+  
   <!--Log out must redirect to logout page to actually logout and stuff and then redirect to login page -->
   <a href="../backend/logout.php" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white">
     Logout
@@ -65,7 +67,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
-  <h1 style="text-align: center">Member Management</h1><br>
+  <h1 style="text-align: center">Carer List</h1><br>
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
@@ -152,15 +154,10 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     
     <!-- Middle Column -->
 
-    
 
     <div class="w3-col m7">
-      <div class="w3-card w3-white w3-round w3-margin">
-        <form action="addMemberForm.php">
-          <button type="submit" style="width: 100%;" class="w3-button w3-theme w3-border w3-padding" name="btnAdd">Add New Member</button>
-        </form>
-      </div>
-
+    
+    <!--
       <div class="w3-row-padding">
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
@@ -174,41 +171,23 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
           </div>
         </div>
       </div>
+-->
 
       <?php
-        if((count($data) == 0) && isset($_GET["searchMember"])): 
-      ?>
-      
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h4>No such member</h4>
-      </div>  
-            
-      <?php endif;
-        if(!isset($_GET["searchMember"])) : 
-      ?>
-
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <h4>Search a member!</h4>
-      </div>  
-
-      <?php endif;
             foreach ($data as $d) :
       ?>
         <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
         <img src="head.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <h4><?=$d->member_first_name?> <?=$d->member_last_name?></h4><br>
-        <hr class="w3-clear">
-        <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i>DOB : <?=$d->member_dob?></p>
-        <p>Member ID : <?=$d->member_id?></p>
+        <h4><?=$d->staff_first_name?> <?=$d->staff_last_name?></h4><br>
+        <p>Staff ID : <?=$d->staff_id?></p>
+        <p><?=$d->position?></p>
         <p>
-          <form action="detailMemberForm.php" method="POST">
-            <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnDetail">See Details</button>
-          </form>
-          <form action="updateMemberForm.php" method="POST">
-            <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnUpdate">Update Details</button>
-          </form>
-          <form action="memberServiceList.php" method="POST">
-            <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnMemberID">Scheduled Services</button>
+            <!--
+          <form action="detailStaffForm.php" method="POST">
+            <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?//=$d->staff_id ?>" name="btnDetail">See Staff Details</button>
+          </form>-->
+          <form action="carerServiceList.php" method="POST">
+            <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->staff_id ?>" name="btnCarerID">See Services Schedule</button>
           </form>
         </p>
         </div>  

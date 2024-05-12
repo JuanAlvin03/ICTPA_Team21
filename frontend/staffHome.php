@@ -47,14 +47,7 @@ html, body, h1, h2, h3, h4, h5{font-family: "Open Sans", sans-serif}
   <a href="memberHome.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Member Management</a>
   <a href="addStaffForm.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Add New Staff</a>
   <a href="preAddWorkScheduleForm.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Schedule a Shift</a>
-  <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">Facility Management Meeting Scheduled for 10am 12/04/2024 in the Staff Meeting Room</a>
-      <a href="#" class="w3-bar-item w3-button">Anonymous Suggestion Box now located in at Reception. Please feel free to voice your feedback. </a>
-      <a href="#" class="w3-bar-item w3-button">Sausage Sizzle for facility members and their family and friends this Friday 12/04/2023 at 1pm. </a>
-    </div>
-  </div>
+  <a href="carerList.php" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Carers List</a>
   <a href="../backend/logout.php" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account">
     Logout
   </a>

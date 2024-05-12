@@ -80,6 +80,90 @@ function queryTodayService(){
     }
 }
 
+// GET all SCHEDULED SERVICE of a staff/carer
+function queryStaffScheduledService($id){
+
+    $service = new PHPSupabase\Service(
+        // PROJECT API KEY
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnemZrd3F3b29ia2F2YnhveHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5Nzc1MTcsImV4cCI6MjAyNjU1MzUxN30.0EG7AWB6TsRMqTssMS9bhf0plepaG1EPpMiX1jW8aUE", 
+        // PROJECT URL
+        "https://egzfkwqwoobkavbxoxry.supabase.co"
+    );
+
+    $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
+    
+    $query = [
+        'select' => '*',
+        'from'   => 'scheduled_service',
+        'join' => 
+        [
+            [
+                'table' => 'member',
+                'tablekey' => 'member_id'
+            ],
+            [
+                'table' => 'service',
+                'tablekey' => 'service_id'
+            ]
+        ],
+        'where' => 
+        [
+            'staff_id' => 'eq.' . intval($id)
+        ],
+        'order' => 'service_start_date_time.asc',
+    ];
+    
+    try{
+        $listMember = $db->createCustomQuery($query)->getResult();
+        return $listMember;
+    }
+    catch(Exception $e){
+        return $e->getMessage();
+    }
+}
+
+// Get scheduled service of a member
+function queryMemberScheduledService($id){
+
+    $service = new PHPSupabase\Service(
+        // PROJECT API KEY
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnemZrd3F3b29ia2F2YnhveHJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5Nzc1MTcsImV4cCI6MjAyNjU1MzUxN30.0EG7AWB6TsRMqTssMS9bhf0plepaG1EPpMiX1jW8aUE", 
+        // PROJECT URL
+        "https://egzfkwqwoobkavbxoxry.supabase.co"
+    );
+
+    $db = $service->initializeDatabase('scheduled_service', 'scheduled_service_id'); //param(tablename, column name of PK)
+    
+    $query = [
+        'select' => '*',
+        'from'   => 'scheduled_service',
+        'join' => 
+        [
+            [
+                'table' => 'member',
+                'tablekey' => 'member_id'
+            ],
+            [
+                'table' => 'service',
+                'tablekey' => 'service_id'
+            ]
+        ],
+        'where' => 
+        [
+            'member_id' => 'eq.' . intval($id)
+        ],
+        'order' => 'service_start_date_time.asc',
+    ];
+    
+    try{
+        $listMember = $db->createCustomQuery($query)->getResult();
+        return $listMember;
+    }
+    catch(Exception $e){
+        return $e->getMessage();
+    }
+}
+
 // GET ONE SCHEDULED SERVICE
 function queryOneScheduledService($id){
 
