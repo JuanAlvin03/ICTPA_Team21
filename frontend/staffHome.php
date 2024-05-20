@@ -237,7 +237,7 @@ html, body, h1, h2, h3, h4, h5{font-family: "Open Sans", sans-serif}
     <div class="w3-col m2">
       <div class="w3-card w3-round w3-white w3-center">
         <div class="w3-container">
-          <p>Friday 10th May 2024</p>
+          <p>Monday 20th May 2024</p>
 
         </div>
       </div>

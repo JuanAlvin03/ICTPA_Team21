@@ -207,7 +207,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
               <li>Preparation of Cleaning Materials</li>
             </ol>
           </p>
-          <p><a href="">Member Service Profile: John Doe 12/04/2024 @ 10am</a></p>
+          <!--<p><a href="">Member Service Profile: John Doe 12/04/2024 @ 10am</a></p>-->
           <p>
             <form action="detailMemberForm.php" method="POST">
               <button type="submit" class="w3-button w3-theme w3-border w3-padding" value="<?= $d->member_id ?>" name="btnDetail">Member Profile</button>
